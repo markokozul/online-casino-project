@@ -11,7 +11,6 @@ module.exports = {
       //hero image for homepage
       backgroundImage: {
         'hero-img': "url('/src/assets/bg.jpg')",
-        'mobile-hero': "url('/src/assets/bg-rotated.jpg')",
         'new-bg': "url('/src/assets/new-bg.jpg')",
       },
     },

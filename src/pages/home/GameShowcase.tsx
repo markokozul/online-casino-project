@@ -1,24 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useContext } from 'react';
 import GameSlider from '../../components/GameSlider';
-
-import { GameData } from '../../types/types';
+import { GamesContext } from '../../context/Context';
 
 export default function GameShowcase() {
-  const [data, setData] = useState<GameData['games']>([]);
-
-  useEffect(() => {
-    fetch('http://localhost:8001/games')
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data);
-        console.log(data);
-      });
-  }, []);
-
+  const games = useContext(GamesContext);
   return (
-    <div className=' w-full'>
-      <h1>Popular Games</h1>
-      <GameSlider games={data} />
+    <div className='w-full px-10 flex justify-center items-center flex-col'>
+      <h1 className='text-white text-3xl self-start'>Popular Games</h1>
+      <GameSlider games={games} />
     </div>
   );
 }

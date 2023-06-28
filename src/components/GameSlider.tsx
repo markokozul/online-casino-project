@@ -1,29 +1,27 @@
-import {
-  useState,
-  useEffect,
-  useRef,
-  useCallback,
-  useDeferredValue,
-} from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import Button from './Button';
 import { GameData } from '../types/types';
+
+//used for preventing unnecessary re-renders
+import debounce from 'lodash.debounce';
+
 //swiping npm package
 import { useSwipeable } from 'react-swipeable';
 
 export default function GameSlider({ games }: GameData) {
   const [move, setMove] = useState(0);
   const [sliderSize, setSliderSize] = useState(0);
-  const [sliderParentSize, setSliderParentSize] = useState(0);
+  const [sliderContainerSize, setSliderContainerSize] = useState(0);
   const [item, setItem] = useState(0);
   //accessing slider DOM element
   const slider = useRef<HTMLDivElement>(null);
 
   const [resize, setResize] = useState(0);
   //accessing DOM elements using callback refs(cant use useRef because DOM isn't loaded on first render)
-  const sliderParent = useCallback(
+  const sliderContainer = useCallback(
     (node: HTMLDivElement) => {
       if (node) {
-        setSliderParentSize(node.getBoundingClientRect().width);
+        setSliderContainerSize(node.getBoundingClientRect().width);
         console.log(node.getBoundingClientRect().width);
       }
     },
@@ -33,47 +31,54 @@ export default function GameSlider({ games }: GameData) {
   const sliderItem = useCallback((node: HTMLDivElement) => {
     if (node) {
       setItem(node.getBoundingClientRect().width);
+      console.log(node.getBoundingClientRect().width);
     }
   }, []);
 
   const handleResize = () => {
+    //sliderContainerSize will update after resize updates
     setResize((prevValue) => prevValue + 1);
+
+    //update slider size(width changed after a breakpoint)
+    setSliderSize(
+      slider.current ? slider.current.getBoundingClientRect().width : 0
+    );
     console.log(resize);
   };
 
-  //used for swiping feature
+  //used for swipe feature
   const handlers = useSwipeable({
     onSwipedLeft: () => handleNext(),
     onSwipedRight: () => handlePrevious(),
     preventScrollOnSwipe: true,
     trackMouse: true,
+    trackTouch: true,
   });
+  //prevent unnecessary re-renders when resizing window
+  const debounceHandleResize = useMemo(() => debounce(handleResize, 300), []);
 
   useEffect(() => {
+    //get width of a slider when games are loaded
     if (games) {
       setSliderSize(
         slider.current ? slider.current.getBoundingClientRect().width : 0
       );
     }
-    const debounceHandleResize: any = () => {
-      setTimeout(() => {
-        handleResize();
-      }, 1000);
-    };
 
     //update state when resizing window(width of element changes)
     window.addEventListener('resize', debounceHandleResize);
 
+    //Cleanup
     return () => {
       window.removeEventListener('resize', debounceHandleResize);
     };
   }, [games]);
 
   const handleNext = () => {
-    if (sliderSize - (Math.abs(move) + item) <= sliderParentSize) {
+    if (sliderSize - (Math.abs(move) + item) <= sliderContainerSize) {
       setMove(
         (prevValue) =>
-          prevValue - (sliderSize - Math.abs(move) - sliderParentSize)
+          prevValue - (sliderSize - Math.abs(move) - sliderContainerSize)
       );
     } else {
       setMove((prevValue) => prevValue - item);
@@ -86,24 +91,41 @@ export default function GameSlider({ games }: GameData) {
       setMove((prevValue) => prevValue + item);
     }
   };
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+
+  /*
+  function handleTouchStart(e: any) {
+    setTouchStart(e.targetTouches[0].clientX);
+  }
+
+  function handleTouchMove(e: any) {
+    setTouchEnd(e.targetTouches[0].clientX);
+  }
+
+  function handleTouchEnd() {
+    if (touchStart - touchEnd > 80) {
+      // do your stuff here for left swipe
+      handleNext();
+    }
+
+    if (touchStart - touchEnd < -80) {
+      // do your stuff here for right swipe
+      handlePrevious();
+    }
+  }
+  */
   return (
-    <div className='h-[100vh] w-[100vw] flex justify-center items-center flex-row '>
-      <button
-        className='bg-yellow-400'
-        //disable 'Previous' button if slider is at the beginning
-        disabled={move === 0 ? true : false}
-        onClick={handlePrevious}
-      >
-        prev
-      </button>
+    <div className='w-full flex justify-center items-center flex-row'>
+      <Button title='<' action={handlePrevious}></Button>
 
       <div
-        className='overflow-hidden w-[80%] h-[200px] border-2 border-purple-800 relative py-10'
-        ref={sliderParent}
+        className='overflow-hidden w-full h-[200px] sm:h-[230px] relative'
+        ref={sliderContainer}
         //inline conditional styling-easier than tailwind conditional styling
 
         style={
-          sliderSize < sliderParentSize
+          sliderSize < sliderContainerSize
             ? {
                 display: 'flex',
                 alignItems: 'center',
@@ -114,43 +136,50 @@ export default function GameSlider({ games }: GameData) {
       >
         <div
           {...handlers}
-          className={`bg-black p-10  inline-flex  transition-all ease-in-out duration-200`}
+          className={`inline-flex  transition-all ease-in-out duration-200`}
           //inline conditional styling-easier than tailwind conditional styling
           style={
-            sliderSize < sliderParentSize
+            sliderSize < sliderContainerSize
               ? {
                   position: undefined,
                 }
               : {
                   left:
-                    sliderSize - Math.abs(move) < sliderParentSize ? '' : move,
+                    sliderSize - Math.abs(move) < sliderContainerSize
+                      ? undefined
+                      : move,
                   position: 'absolute',
                   right:
-                    sliderSize - Math.abs(move) < sliderParentSize ? 0 : '',
+                    sliderSize - Math.abs(move) < sliderContainerSize
+                      ? 0
+                      : undefined,
                 }
           }
           ref={slider}
         >
           {games.map((item) => (
             <div
+              /*
+              onTouchStart={(touchStartEvent) =>
+                handleTouchStart(touchStartEvent)
+              }
+              onTouchMove={(touchMoveEvent) => handleTouchMove(touchMoveEvent)}
+              onTouchEnd={() => handleTouchEnd()}
+              */
               key={item.id}
-              className='w-[200px] h-[200px] bg-slate-400 '
+              className='w-[200px] h-[200px] p-4 sm:w-[230px] sm:h-[230px] '
               ref={sliderItem}
             >
-              <img src={item.img} className='mx-2' alt=''></img>
+              <img
+                src={item.img}
+                className='border-2 border-[#ffdd2d]'
+                alt={item.title}
+              ></img>
             </div>
           ))}
         </div>
       </div>
-
-      <button
-        className='bg-yellow-400'
-        //disable 'Next' button if slider is at the end
-
-        onClick={handleNext}
-      >
-        next
-      </button>
+      <Button title='>' action={handleNext}></Button>
     </div>
   );
 }
