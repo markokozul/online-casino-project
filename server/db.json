@@ -1,10 +1,44 @@
 {
   "games": [
     {
-      "name": "1"
+      "id": 1,
+      "img": "https://solarops.s3.eu-west-1.amazonaws.com/sonnenspiele/images/de/MerkurEyeOfHorusMulti.jpg",
+      "title": "EyeOfHorus"
     },
     {
-      "name": "2"
+      "id": 2,
+      "img": "https://solarops.s3.eu-west-1.amazonaws.com/sonnenspiele/images/de/GreentubeBookOfRaDeluxe.jpg",
+      "title": "Book Of Ra Deluxe"
+    },
+    {
+      "id": 3,
+      "img": "https://solarops.s3.eu-west-1.amazonaws.com/sonnenspiele/images/de/GreentubeBookOfRa.jpg",
+      "title": "Book Of Ra"
+    },
+    {
+      "id": 4,
+      "img": "https://solarops.s3.eu-west-1.amazonaws.com/sonnenspiele/images/de/GreentubeDiamondLinkMightyElephant.jpg",
+      "title": "Mighty Elephant"
+    },
+    {
+      "id": 5,
+      "img": "https://solarops.s3.eu-west-1.amazonaws.com/sonnenspiele/images/de/GreentubeRoaringForties.jpg",
+      "title": "Roaring Forties"
+    },
+    {
+      "id": 6,
+      "img": "https://solarops.s3.eu-west-1.amazonaws.com/sonnenspielenull/null/MerkurBoombastic.jpg",
+      "title": "Boombastic"
+    },
+    {
+      "id": 7,
+      "img": "https://solarops.s3.eu-west-1.amazonaws.com/sonnenspiele/images/de/GreentubeDiamondLinkMightySevens.jpg",
+      "title": "Mighty Sevens"
+    },
+    {
+      "id": 8,
+      "img": "https://solarops.s3.eu-west-1.amazonaws.com/sonnenspiele/images/de/MerkurBlazingStarMulti.jpg",
+      "title": "EyeOfHorus"
     }
   ]
 }

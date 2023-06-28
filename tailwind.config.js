@@ -5,13 +5,14 @@ module.exports = {
     extend: {
       //main colors to use throughout the application
       colors: {
-        'primary-btn': '#ff1b50',
-        'bg-main': '#0c132d',
+        'primary-btn': '',
+        'bg-main': '#33052a',
       },
       //hero image for homepage
       backgroundImage: {
         'hero-img': "url('/src/assets/bg.jpg')",
         'mobile-hero': "url('/src/assets/bg-rotated.jpg')",
+        'new-bg': "url('/src/assets/new-bg.jpg')",
       },
     },
   },

@@ -3,7 +3,7 @@ import Router from './pages/Router';
 function App() {
   return (
     <BrowserRouter>
-      <Router></Router>
+      <Router />
     </BrowserRouter>
   );
 }
