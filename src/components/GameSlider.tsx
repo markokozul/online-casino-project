@@ -1,18 +1,26 @@
-import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
+import { GamesContext } from '../context/Context';
 import Button from './Button';
-import { GameData } from '../types/types';
-
 //used for preventing unnecessary re-renders
 import debounce from 'lodash.debounce';
 
 //swiping npm package
 import { useSwipeable } from 'react-swipeable';
 
-export default function GameSlider({ games }: GameData) {
+export default function GameSlider() {
+  const games = useContext(GamesContext);
+
   const [move, setMove] = useState(0);
   const [sliderSize, setSliderSize] = useState(0);
   const [sliderContainerSize, setSliderContainerSize] = useState(0);
-  const [item, setItem] = useState(0);
+  const [sliderItemSize, setsliderItemSize] = useState(0);
   //accessing slider DOM element
   const slider = useRef<HTMLDivElement>(null);
 
@@ -24,13 +32,14 @@ export default function GameSlider({ games }: GameData) {
         setSliderContainerSize(node.getBoundingClientRect().width);
         console.log(node.getBoundingClientRect().width);
       }
+      //update slider container width when resize state changes
     },
     [resize]
   );
 
   const sliderItem = useCallback((node: HTMLDivElement) => {
     if (node) {
-      setItem(node.getBoundingClientRect().width);
+      setsliderItemSize(node.getBoundingClientRect().width);
       console.log(node.getBoundingClientRect().width);
     }
   }, []);
@@ -55,7 +64,7 @@ export default function GameSlider({ games }: GameData) {
     trackTouch: true,
   });
   //prevent unnecessary re-renders when resizing window
-  const debounceHandleResize = useMemo(() => debounce(handleResize, 300), []);
+  const debounceHandleResize = useMemo(() => debounce(handleResize, 800), []);
 
   useEffect(() => {
     //get width of a slider when games are loaded
@@ -72,29 +81,30 @@ export default function GameSlider({ games }: GameData) {
     return () => {
       window.removeEventListener('resize', debounceHandleResize);
     };
-  }, [games]);
+  }, [games, debounceHandleResize]);
 
   const handleNext = () => {
-    if (sliderSize - (Math.abs(move) + item) <= sliderContainerSize) {
+    if (sliderSize - (Math.abs(move) + sliderItemSize) <= sliderContainerSize) {
       setMove(
         (prevValue) =>
           prevValue - (sliderSize - Math.abs(move) - sliderContainerSize)
       );
     } else {
-      setMove((prevValue) => prevValue - item);
+      setMove((prevValue) => prevValue - sliderItemSize);
     }
   };
   const handlePrevious = () => {
-    if (Math.abs(move) < item) {
+    if (Math.abs(move) < sliderItemSize) {
       setMove((prevValue) => prevValue + Math.abs(move));
     } else {
-      setMove((prevValue) => prevValue + item);
+      setMove((prevValue) => prevValue + sliderItemSize);
     }
   };
+  /*
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
 
-  /*
+
   function handleTouchStart(e: any) {
     setTouchStart(e.targetTouches[0].clientX);
   }
@@ -157,26 +167,29 @@ export default function GameSlider({ games }: GameData) {
           }
           ref={slider}
         >
-          {games.map((item) => (
-            <div
-              /*
+          {games &&
+            games.map((item) => (
+              <div
+                /*
               onTouchStart={(touchStartEvent) =>
                 handleTouchStart(touchStartEvent)
               }
               onTouchMove={(touchMoveEvent) => handleTouchMove(touchMoveEvent)}
               onTouchEnd={() => handleTouchEnd()}
               */
-              key={item.id}
-              className='w-[200px] h-[200px] p-4 sm:w-[230px] sm:h-[230px] '
-              ref={sliderItem}
-            >
-              <img
-                src={item.img}
-                className='border-2 border-[#ffdd2d]'
-                alt={item.title}
-              ></img>
-            </div>
-          ))}
+                key={item.id}
+                className='w-[200px] h-[200px] p-4 sm:w-[230px] sm:h-[230px] '
+                //set ref to only one sliderItemSize in slider(prevent unnecessary state updates in sliderItem callback function)
+                ref={item.id === 1 ? sliderItem : undefined}
+              >
+                <img
+                  loading='lazy'
+                  src={item.img}
+                  className='border-2 border-[#ffdd2d]'
+                  alt={item.title}
+                ></img>
+              </div>
+            ))}
         </div>
       </div>
       <Button title='>' action={handleNext}></Button>

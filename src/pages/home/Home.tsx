@@ -6,17 +6,18 @@ import GameShowcase from './GameShowcase';
 import { GamesContext } from '../../context/Context';
 import { useEffect, useState } from 'react';
 import { GameData } from '../../types/types';
+import Loader from '../../components/Loader';
+import useFetch from '../../hooks/useFetch';
 
 export default function Home() {
   const [games, setGames] = useState<GameData['games']>([]);
 
-  useEffect(() => {
-    fetch('http://localhost:8001/games')
-      .then((res) => res.json())
-      .then((data) => {
-        setGames(data);
-      });
-  }, []);
+  const [data, loading, error] = useFetch('http://localhost:8001/games');
+
+  if (error) console.log(error);
+
+  if (loading) return <Loader />;
+
   return (
     <div>
       <GamesContext.Provider value={games}>
