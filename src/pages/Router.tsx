@@ -6,7 +6,7 @@ export default function Router() {
   return (
     <Routes>
       <Route path='/' element={<Home />}></Route>
-      <Route path='/details/:game' element={<GameDetails />}></Route>
+      <Route path='/details/:id' element={<GameDetails />}></Route>
     </Routes>
   );
 }

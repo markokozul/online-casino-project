@@ -3,6 +3,7 @@ import NavigateButton from '../../components/NavigateButton';
 import PaymentOptionsShowcase from '../../components/PaymentOptionsShowcase';
 import Footer from '../../components/layout/Footer';
 import Header from '../../components/layout/Header';
+import Main from '../../components/layout/Main';
 import { useAPI } from '../../context/APIContext';
 import GameShowcase from './GameShowcase';
 
@@ -21,11 +22,11 @@ export default function Home() {
 
         <PaymentOptionsShowcase />
       </div>
-      <div className='bg-bg-main flex items-center justify-center flex-col'>
-        <GameShowcase />
-        <GameShowcase />
-        <GameShowcase />
-      </div>
+      <Main>
+        <GameShowcase title='Popular Games' />
+        <GameShowcase title='Best Games' />
+        <GameShowcase title='Top Winnings Games' />
+      </Main>
       <Footer />
     </div>
   );

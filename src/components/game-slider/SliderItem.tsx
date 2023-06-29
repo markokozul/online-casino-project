@@ -1,16 +1,9 @@
 import { Link } from 'react-router-dom';
 import { SliderItemProps } from '../../types/types';
 
-export default function SliderItem({ img, title, refs }: SliderItemProps) {
-  //function used for transforming a title to all-lowercase-no-spaces for usage in routing url
-  const transformTitle = () => {
-    let newTitle = title.toLocaleLowerCase();
-    newTitle = newTitle.replace(/\s+/g, '');
-    return newTitle;
-  };
-
+export default function SliderItem({ img, title, id, refs }: SliderItemProps) {
   return (
-    <Link to={`/details/${transformTitle()}`}>
+    <Link to={`/details/${id}`}>
       <div
         ref={refs}
         className='w-[200px] h-[200px] p-4 sm:w-[230px] sm:h-[230px] '

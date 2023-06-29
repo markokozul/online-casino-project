@@ -1,10 +1,7 @@
-export interface GameData {
-  games: { id: number; title: string; img: string }[];
-}
-
 export interface SliderItemProps {
   title: string;
   img: string;
+  id: number;
   refs?: (node: HTMLDivElement) => void;
 }
 
@@ -16,4 +13,13 @@ export interface NavigateButtonProps {
 export interface ButtonProps {
   title: string;
   action?: () => void;
+}
+
+export interface GameShowcaseProps {
+  title: string;
+}
+
+export interface DetailsProps {
+  name: string;
+  img: string;
 }

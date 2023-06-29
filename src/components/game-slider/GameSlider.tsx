@@ -167,6 +167,7 @@ export default function GameSlider() {
                 //prevent unnecessary re-renders by putting ref on only one item to get item's width
                 refs={item.id === 1 ? sliderItemRef : undefined}
                 img={item.img}
+                id={item.id}
                 title={item.title}
               ></SliderItem>
             ))}
