@@ -6,13 +6,12 @@ import {
   useRef,
   useState,
 } from 'react';
-import { GamesContext } from '../context/Context';
-import Button from './Button';
+import { GamesContext } from '../../context/Context';
+import Button from '../Button';
+import SliderItem from './SliderItem';
+
 //used for preventing unnecessary re-renders
 import debounce from 'lodash.debounce';
-
-//swiping npm package
-import { useSwipeable } from 'react-swipeable';
 
 export default function GameSlider() {
   const games = useContext(GamesContext);
@@ -20,27 +19,27 @@ export default function GameSlider() {
   const [move, setMove] = useState(0);
   const [sliderSize, setSliderSize] = useState(0);
   const [sliderContainerSize, setSliderContainerSize] = useState(0);
-  const [sliderItemSize, setsliderItemSize] = useState(0);
+  const [sliderItem, setsliderItemSize] = useState(0);
+
+  const [resize, setResize] = useState(0);
+
   //accessing slider DOM element
   const slider = useRef<HTMLDivElement>(null);
 
-  const [resize, setResize] = useState(0);
   //accessing DOM elements using callback refs(cant use useRef because DOM isn't loaded on first render)
   const sliderContainer = useCallback(
     (node: HTMLDivElement) => {
       if (node) {
         setSliderContainerSize(node.getBoundingClientRect().width);
-        console.log(node.getBoundingClientRect().width);
       }
     },
     //update slider container width when resize state changes
     [resize]
   );
 
-  const sliderItem = useCallback((node: HTMLDivElement) => {
+  const sliderItemRef = useCallback((node: HTMLDivElement) => {
     if (node) {
       setsliderItemSize(node.getBoundingClientRect().width);
-      console.log(node.getBoundingClientRect().width);
     }
   }, []);
 
@@ -52,17 +51,8 @@ export default function GameSlider() {
     setSliderSize(
       slider.current ? slider.current.getBoundingClientRect().width : 0
     );
-    console.log(resize);
   };
 
-  //used for swipe feature
-  const handlers = useSwipeable({
-    onSwipedLeft: () => handleNext(),
-    onSwipedRight: () => handlePrevious(),
-    preventScrollOnSwipe: true,
-    trackMouse: true,
-    trackTouch: true,
-  });
   //prevent unnecessary re-renders when resizing window
   const debounceHandleResize = useMemo(() => debounce(handleResize, 800), []);
 
@@ -84,20 +74,20 @@ export default function GameSlider() {
   }, [games, debounceHandleResize]);
 
   const handleNext = () => {
-    if (sliderSize - (Math.abs(move) + sliderItemSize) <= sliderContainerSize) {
+    if (sliderSize - (Math.abs(move) + sliderItem) <= sliderContainerSize) {
       setMove(
         (prevValue) =>
           prevValue - (sliderSize - Math.abs(move) - sliderContainerSize)
       );
     } else {
-      setMove((prevValue) => prevValue - sliderItemSize);
+      setMove((prevValue) => prevValue - sliderItem);
     }
   };
   const handlePrevious = () => {
-    if (Math.abs(move) < sliderItemSize) {
+    if (Math.abs(move) < sliderItem) {
       setMove((prevValue) => prevValue + Math.abs(move));
     } else {
-      setMove((prevValue) => prevValue + sliderItemSize);
+      setMove((prevValue) => prevValue + sliderItem);
     }
   };
   /*
@@ -126,7 +116,7 @@ export default function GameSlider() {
   }
   */
   return (
-    <div className='w-full flex justify-center items-center flex-row'>
+    <div className='w-full flex items-center justify-center flex-row'>
       <Button title='<' action={handlePrevious}></Button>
 
       <div
@@ -135,6 +125,7 @@ export default function GameSlider() {
         //inline conditional styling-easier than tailwind conditional styling
 
         style={
+          //if slider size is smaller than container,set slider on center of container
           sliderSize < sliderContainerSize
             ? {
                 display: 'flex',
@@ -145,10 +136,10 @@ export default function GameSlider() {
         }
       >
         <div
-          {...handlers}
           className={`inline-flex  transition-all ease-in-out duration-200`}
           //inline conditional styling-easier than tailwind conditional styling
           style={
+            //adjust position of a slider
             sliderSize < sliderContainerSize
               ? {
                   position: undefined,
@@ -158,37 +149,31 @@ export default function GameSlider() {
                     sliderSize - Math.abs(move) < sliderContainerSize
                       ? undefined
                       : move,
-                  position: 'absolute',
                   right:
                     sliderSize - Math.abs(move) < sliderContainerSize
                       ? 0
                       : undefined,
+                  position: 'absolute',
                 }
           }
           ref={slider}
         >
           {games &&
             games.map((item) => (
-              <div
-                /*
+              /*
               onTouchStart={(touchStartEvent) =>
                 handleTouchStart(touchStartEvent)
               }
               onTouchMove={(touchMoveEvent) => handleTouchMove(touchMoveEvent)}
               onTouchEnd={() => handleTouchEnd()}
               */
-                key={item.id}
-                className='w-[200px] h-[200px] p-4 sm:w-[230px] sm:h-[230px] '
-                //set ref to only one sliderItemSize in slider(prevent unnecessary state updates in sliderItem callback function)
-                ref={item.id === 1 ? sliderItem : undefined}
-              >
-                <img
-                  loading='lazy'
-                  src={item.img}
-                  className='border-2 border-[#ffdd2d]'
-                  alt={item.title}
-                ></img>
-              </div>
+
+              <SliderItem
+                //prevent unnecessary re-renders by putting ref on only one item to get item's width
+                refs={item.id === 1 ? sliderItemRef : undefined}
+                img={item.img}
+                title={item.title}
+              ></SliderItem>
             ))}
         </div>
       </div>

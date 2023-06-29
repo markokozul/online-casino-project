@@ -1,7 +1,8 @@
 import { Suspense, lazy } from 'react';
 import Loader from '../../components/Loader';
-
-const GameSlider = lazy(() => import('../../components/GameSlider'));
+const GameSlider = lazy(
+  () => import('../../components/game-slider/GameSlider')
+);
 
 export default function GameShowcase() {
   return (
