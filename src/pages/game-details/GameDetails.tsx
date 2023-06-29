@@ -1,21 +1,21 @@
 import { useParams } from 'react-router';
 import Loader from '../../components/Loader';
-import Header from '../../components/layout/Header';
-import useFetch from '../../hooks/useFetch';
-import Main from '../../components/layout/Main';
 import Footer from '../../components/layout/Footer';
+import Header from '../../components/layout/Header';
+import Main from '../../components/layout/Main';
+import useFetch from '../../hooks/useFetch';
 import GameShowcase from '../home/GameShowcase';
 import Details from './Details';
-import Button from '../../components/Button';
 export default function GameDetails() {
-  //get id of a game from url
-  let { id } = useParams();
+  let { id } = useParams(); //get id of a game from url
 
   const { data, loading, error } = useFetch(
-    `http://localhost:8001/games/${id}`
+    `http://localhost:8001/games/${id}`,
+    0 //set timeout to 0
   );
 
   if (loading) return <Loader />;
+  if (error) console.log(error);
 
   return (
     <div>

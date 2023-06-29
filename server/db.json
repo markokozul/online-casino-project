@@ -3,82 +3,122 @@
     {
       "id": 1,
       "img": "https://solarops.s3.eu-west-1.amazonaws.com/sonnenspiele/images/de/MerkurEyeOfHorusMulti.jpg",
-      "title": "EyeOfHorus"
+      "title": "EyeOfHorus",
+      "theme": "egypt"
     },
     {
       "id": 2,
       "img": "https://solarops.s3.eu-west-1.amazonaws.com/sonnenspiele/images/de/GreentubeBookOfRaDeluxe.jpg",
-      "title": "Book Of Ra Deluxe"
+      "title": "Book Of Ra Deluxe",
+      "theme": "egypt"
     },
     {
       "id": 3,
       "img": "https://solarops.s3.eu-west-1.amazonaws.com/sonnenspiele/images/de/GreentubeBookOfRa.jpg",
-      "title": "Book Of Ra"
+      "title": "Book Of Ra",
+      "theme": "egypt"
     },
     {
       "id": 4,
       "img": "https://solarops.s3.eu-west-1.amazonaws.com/sonnenspiele/images/de/GreentubeDiamondLinkMightyElephant.jpg",
-      "title": "Mighty Elephant"
+      "title": "Mighty Elephant",
+      "theme": "Misc"
     },
     {
       "id": 5,
       "img": "https://solarops.s3.eu-west-1.amazonaws.com/sonnenspiele/images/de/GreentubeRoaringForties.jpg",
-      "title": "Roaring Forties"
+      "title": "Roaring Forties",
+      "theme": "Misc"
     },
     {
       "id": 6,
       "img": "https://solarops.s3.eu-west-1.amazonaws.com/sonnenspielenull/null/MerkurBoombastic.jpg",
-      "title": "Boombastic"
+      "title": "Boombastic",
+      "theme": "Misc"
     },
     {
       "id": 7,
       "img": "https://solarops.s3.eu-west-1.amazonaws.com/sonnenspiele/images/de/GreentubeDiamondLinkMightySevens.jpg",
-      "title": "Mighty Sevens"
+      "title": "Mighty Sevens",
+      "theme": "Misc"
     },
     {
       "id": 8,
-      "img": "https://solarops.s3.eu-west-1.amazonaws.com/sonnenspiele/images/de/MerkurBlazingStarMulti.jpg",
-      "title": "EyeOfHorus"
+      "img": "https://solarops.s3.eu-west-1.amazonaws.com/sonnenspielenull/null/MerkurFishinFrenzyMulti.gif",
+      "title": "Fishin' Frenzy MULTI",
+      "theme": "water"
     },
     {
       "id": 9,
-      "img": "https://solarops.s3.eu-west-1.amazonaws.com/sonnenspiele/images/de/MerkurEyeOfHorusMulti.jpg",
-      "title": "EyeOfHorus"
+      "img": "https://solarops.s3.eu-west-1.amazonaws.com/sonnenspiele/images/de/GamomatBookOfMadness.gif",
+      "title": "Book of Madness",
+      "theme": "Misc"
     },
     {
       "id": 10,
-      "img": "https://solarops.s3.eu-west-1.amazonaws.com/sonnenspiele/images/de/GreentubeBookOfRaDeluxe.jpg",
-      "title": "Book Of Ra Deluxe"
+      "img": "https://solarops.s3.eu-west-1.amazonaws.com/sonnenspiele/images/en/GamomatRamsesBook.jpg",
+      "title": "Ramses Book",
+      "theme": "egypt"
     },
     {
       "id": 11,
-      "img": "https://solarops.s3.eu-west-1.amazonaws.com/sonnenspiele/images/de/GreentubeBookOfRa.jpg",
-      "title": "Book Of Ra"
+      "img": "https://solarops.s3.eu-west-1.amazonaws.com/sonnenspiele/images/de/AmaticAllwaysFruits.jpg",
+      "title": "All Ways Fruits",
+      "theme": "Misc"
     },
     {
       "id": 12,
-      "img": "https://solarops.s3.eu-west-1.amazonaws.com/sonnenspiele/images/de/GreentubeDiamondLinkMightyElephant.jpg",
-      "title": "Mighty Elephant"
+      "img": "https://solarops.s3.eu-west-1.amazonaws.com/sonnenspiele/images/de/AmaticBookOfQueen.jpg",
+      "title": "Book of Queen ",
+      "theme": "egypt"
     },
     {
       "id": 13,
-      "img": "https://solarops.s3.eu-west-1.amazonaws.com/sonnenspiele/images/de/GreentubeRoaringForties.jpg",
-      "title": "Roaring Forties"
+      "img": "https://solarops.s3.eu-west-1.amazonaws.com/sonnenspielenull/de/GamomatBooksAndTemples.jpg",
+      "title": "Books & Temples",
+      "theme": "egypt"
     },
     {
       "id": 14,
-      "img": "https://solarops.s3.eu-west-1.amazonaws.com/sonnenspielenull/null/MerkurBoombastic.jpg",
-      "title": "Boombastic"
+      "img": "https://solarops.s3.eu-west-1.amazonaws.com/sonnenspiele/images/de/GreentubeDolphinsPearl.jpg",
+      "title": "Dolphin's Pearl™",
+      "theme": "water"
     },
     {
       "id": 15,
-      "img": "https://solarops.s3.eu-west-1.amazonaws.com/sonnenspiele/images/de/GreentubeDiamondLinkMightySevens.jpg",
-      "title": "Mighty Sevens"
+      "img": "https://solarops.s3.eu-west-1.amazonaws.com/sonnenspiele/images/de/MerkurCrazyFishing.jpg",
+      "title": "Crazy Fishin'",
+      "theme": "water"
     },
     {
       "id": 16,
-      "img": "https://solarops.s3.eu-west-1.amazonaws.com/sonnenspiele/images/de/MerkurBlazingStarMulti.jpg",
-      "title": "EyeOfHorus"
+      "img": "https://solarops.s3.eu-west-1.amazonaws.com/sonnenspiele/images/de/MerkurDreamingIsland.jpg",
+      "title": "Dreaming Island",
+      "theme": "water"
+    },
+    {
+      "id": 17,
+      "img": "https://solarops.s3.eu-west-1.amazonaws.com/sonnenspiele/images/de/GreentubeDolphinsPearl10Deluxe.jpg",
+      "title": "Dolphin's Pearl™ deluxe 10",
+      "theme": "water"
+    },
+    {
+      "id": 18,
+      "img": "https://solarops.s3.eu-west-1.amazonaws.com/sonnenspiele/images/de/GreentubeLordOfTheOceanMagic.jpg",
+      "title": "Lord of the Ocean™",
+      "theme": "water"
+    },
+    {
+      "id": 19,
+      "img": "https://solarops.s3.eu-west-1.amazonaws.com/sonnenspiele/images/en/AmaticMegaShark.jpg",
+      "title": "Mega Shark",
+      "theme": "water"
+    },
+    {
+      "id": 20,
+      "img": "https://solarops.s3.eu-west-1.amazonaws.com/sonnenspiele/images/de/AmaticMermaidsGold.jpg",
+      "title": "Mermaids Gold",
+      "theme": "water"
     }
   ]
 }

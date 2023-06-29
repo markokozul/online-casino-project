@@ -2,18 +2,17 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useAPI } from '../../context/APIContext';
 import Button from '../Button';
 import SliderItem from './SliderItem';
+import debounce from 'lodash.debounce'; //used for preventing unnecessary re-renders
+import { GameSliderProps } from '../../types/types';
 
-//used for preventing unnecessary re-renders
-import debounce from 'lodash.debounce';
+export default function GameSlider({ theme }: GameSliderProps) {
+  const { data } = useAPI(); //custom hook for Context
 
-export default function GameSlider() {
-  //custom hook for Context
-  const { data } = useAPI();
-
-  const [move, setMove] = useState(0);
+  const [move, setMove] = useState(0); // how much has slider moved in pixels
   const [sliderSize, setSliderSize] = useState(0);
   const [sliderContainerSize, setSliderContainerSize] = useState(0);
-  const [sliderItem, setsliderItemSize] = useState(0);
+  const [sliderItemSize, setsliderItemSize] = useState(0); //
+  const [filteredGames, setFilteredGames] = useState<any>(null);
 
   const [resize, setResize] = useState(0);
 
@@ -27,19 +26,18 @@ export default function GameSlider() {
         setSliderContainerSize(node.getBoundingClientRect().width);
       }
     },
-    //update slider container width when resize state changes
-    [resize]
+    [resize] //update slider container width when resize state changes
   );
 
   const sliderItemRef = useCallback((node: HTMLDivElement) => {
     if (node) {
+      console.log('lmao');
       setsliderItemSize(node.getBoundingClientRect().width);
     }
   }, []);
 
   const handleResize = () => {
-    //sliderContainerSize will update after resize updates
-    setResize((prevValue) => prevValue + 1);
+    setResize((prevValue) => prevValue + 1); //sliderContainerSize will update after resize updates
 
     //update slider size(width changed after a breakpoint)
     setSliderSize(
@@ -51,6 +49,9 @@ export default function GameSlider() {
   const debounceHandleResize = useMemo(() => debounce(handleResize, 500), []);
 
   useEffect(() => {
+    if (theme) {
+      setFilteredGames(data.filter((item: any) => item.theme === theme)); //filter game data if theme is provided
+    }
     //get width of a slider when games are loaded
     if (data) {
       setSliderSize(
@@ -58,30 +59,33 @@ export default function GameSlider() {
       );
     }
 
-    //update state when resizing window(width of element changes)
-    window.addEventListener('resize', debounceHandleResize);
+    window.addEventListener('resize', debounceHandleResize); //update state when resizing window(width of element changes)
 
-    //Cleanup
+    //Cleanup of event listener
     return () => {
       window.removeEventListener('resize', debounceHandleResize);
     };
   }, [data, debounceHandleResize]);
 
+  //function for scrolling right
   const handleNext = () => {
-    if (sliderSize - (Math.abs(move) + sliderItem) <= sliderContainerSize) {
+    console.log(move, sliderSize, sliderContainerSize, sliderItemSize);
+    if (sliderSize - (Math.abs(move) + sliderItemSize) <= sliderContainerSize) {
       setMove(
         (prevValue) =>
           prevValue - (sliderSize - Math.abs(move) - sliderContainerSize)
       );
     } else {
-      setMove((prevValue) => prevValue - sliderItem);
+      setMove((prevValue) => prevValue - sliderItemSize);
     }
   };
+
+  //function for scrolling left
   const handlePrevious = () => {
-    if (Math.abs(move) < sliderItem) {
+    if (Math.abs(move) < sliderItemSize) {
       setMove((prevValue) => prevValue + Math.abs(move));
     } else {
-      setMove((prevValue) => prevValue + sliderItem);
+      setMove((prevValue) => prevValue + sliderItemSize);
     }
   };
   /*
@@ -117,10 +121,8 @@ export default function GameSlider() {
         className='overflow-hidden w-full h-[200px] sm:h-[230px] relative'
         ref={sliderContainer}
         //inline conditional styling-easier than tailwind conditional styling
-
         style={
-          //if slider size is smaller than container,set slider on center of container
-          sliderSize < sliderContainerSize
+          sliderSize < sliderContainerSize //if slider size is smaller than container,set slider on center of container
             ? {
                 display: 'flex',
                 alignItems: 'center',
@@ -130,11 +132,17 @@ export default function GameSlider() {
         }
       >
         <div
+          /*
+        onTouchStart={(touchStartEvent) =>
+          handleTouchStart(touchStartEvent)
+        }
+        onTouchMove={(touchMoveEvent) => handleTouchMove(touchMoveEvent)}
+        onTouchEnd={() => handleTouchEnd()}
+        */
           className={`inline-flex  transition-all ease-in-out duration-200`}
           //inline conditional styling-easier than tailwind conditional styling
           style={
-            //adjust position of a slider
-            sliderSize < sliderContainerSize
+            sliderSize < sliderContainerSize //adjust position of a slider
               ? {
                   position: undefined,
                 }
@@ -152,25 +160,25 @@ export default function GameSlider() {
           }
           ref={slider}
         >
-          {data &&
-            data.map((item: any) => (
-              /*
-              onTouchStart={(touchStartEvent) =>
-                handleTouchStart(touchStartEvent)
-              }
-              onTouchMove={(touchMoveEvent) => handleTouchMove(touchMoveEvent)}
-              onTouchEnd={() => handleTouchEnd()}
-              */
-
-              <SliderItem
-                key={item.id}
-                //prevent unnecessary re-renders by putting ref on only one item to get item's width
-                refs={item.id === 1 ? sliderItemRef : undefined}
-                img={item.img}
-                id={item.id}
-                title={item.title}
-              ></SliderItem>
-            ))}
+          {filteredGames
+            ? filteredGames.map((item: any) => (
+                <SliderItem
+                  key={item.id}
+                  refs={item.id === 1 ? sliderItemRef : undefined} //prevent unnecessary re-renders by putting ref on only one item to get item's width
+                  img={item.img}
+                  id={item.id}
+                  title={item.title}
+                ></SliderItem>
+              ))
+            : data.map((item: any) => (
+                <SliderItem
+                  key={item.id}
+                  refs={item.id === 1 ? sliderItemRef : undefined} //prevent unnecessary re-renders by putting ref on only one item to get item's width
+                  img={item.img}
+                  id={item.id}
+                  title={item.title}
+                ></SliderItem>
+              ))}
         </div>
       </div>
       <Button title='>' action={handleNext}></Button>

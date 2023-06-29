@@ -9,7 +9,10 @@ export default function APIContextProvider({
   children: ReactNode;
 }) {
   // Fetch data using custom useFetch hook
-  const { data, loading, error } = useFetch('http://localhost:8001/games');
+  const { data, loading, error } = useFetch(
+    'http://localhost:8001/games',
+    1000
+  );
 
   return (
     <APIContext.Provider value={{ data, loading, error }}>

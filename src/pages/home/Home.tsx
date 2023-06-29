@@ -24,8 +24,8 @@ export default function Home() {
       </div>
       <Main>
         <GameShowcase title='Popular Games' />
-        <GameShowcase title='Best Games' />
-        <GameShowcase title='Top Winnings Games' />
+        <GameShowcase title='Water Themed Games' theme='water' />
+        <GameShowcase title='Egypt Themed Games' theme='egypt' />
       </Main>
       <Footer />
     </div>

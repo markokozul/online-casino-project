@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
-export default function useFetch(url: string) {
+export default function useFetch(url: string, timeout: number) {
   const [data, setData] = useState<any>();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -17,9 +17,9 @@ export default function useFetch(url: string) {
           setError(err);
         })
         .finally(() => setLoading(false));
-      //show loader for atleast 1 second
-    }, 1000);
-  }, [url, setData]);
+      //show loader for specified amount of time
+    }, timeout);
+  }, [url, setData, timeout]);
 
   return { data, loading, error };
 }

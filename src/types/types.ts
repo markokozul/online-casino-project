@@ -17,6 +17,10 @@ export interface ButtonProps {
 
 export interface GameShowcaseProps {
   title: string;
+  theme?: string;
+}
+export interface GameSliderProps {
+  theme?: string;
 }
 
 export interface DetailsProps {
