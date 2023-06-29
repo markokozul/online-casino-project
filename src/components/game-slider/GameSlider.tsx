@@ -1,12 +1,5 @@
-import {
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
-import { GamesContext } from '../../context/Context';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useAPI } from '../../context/APIContext';
 import Button from '../Button';
 import SliderItem from './SliderItem';
 
@@ -14,7 +7,8 @@ import SliderItem from './SliderItem';
 import debounce from 'lodash.debounce';
 
 export default function GameSlider() {
-  const games = useContext(GamesContext);
+  //custom hook for Context
+  const { data } = useAPI();
 
   const [move, setMove] = useState(0);
   const [sliderSize, setSliderSize] = useState(0);
@@ -54,11 +48,11 @@ export default function GameSlider() {
   };
 
   //prevent unnecessary re-renders when resizing window
-  const debounceHandleResize = useMemo(() => debounce(handleResize, 800), []);
+  const debounceHandleResize = useMemo(() => debounce(handleResize, 500), []);
 
   useEffect(() => {
     //get width of a slider when games are loaded
-    if (games) {
+    if (data) {
       setSliderSize(
         slider.current ? slider.current.getBoundingClientRect().width : 0
       );
@@ -71,7 +65,7 @@ export default function GameSlider() {
     return () => {
       window.removeEventListener('resize', debounceHandleResize);
     };
-  }, [games, debounceHandleResize]);
+  }, [data, debounceHandleResize]);
 
   const handleNext = () => {
     if (sliderSize - (Math.abs(move) + sliderItem) <= sliderContainerSize) {
@@ -158,8 +152,8 @@ export default function GameSlider() {
           }
           ref={slider}
         >
-          {games &&
-            games.map((item) => (
+          {data &&
+            data.map((item: any) => (
               /*
               onTouchStart={(touchStartEvent) =>
                 handleTouchStart(touchStartEvent)
@@ -169,6 +163,7 @@ export default function GameSlider() {
               */
 
               <SliderItem
+                key={item.id}
                 //prevent unnecessary re-renders by putting ref on only one item to get item's width
                 refs={item.id === 1 ? sliderItemRef : undefined}
                 img={item.img}
