@@ -12,7 +12,7 @@ import useFetch from '../../hooks/useFetch';
 export default function Home() {
   const [games, setGames] = useState<GameData['games']>([]);
 
-  const [data, loading, error] = useFetch('http://localhost:8001/games');
+  const [loading, error] = useFetch('http://localhost:8001/games', setGames);
 
   if (error) console.log(error);
 

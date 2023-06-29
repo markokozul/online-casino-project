@@ -32,8 +32,8 @@ export default function GameSlider() {
         setSliderContainerSize(node.getBoundingClientRect().width);
         console.log(node.getBoundingClientRect().width);
       }
-      //update slider container width when resize state changes
     },
+    //update slider container width when resize state changes
     [resize]
   );
 
