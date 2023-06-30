@@ -20,6 +20,7 @@ export default function GameDetails() {
     <div>
       <Header />
       <Main>
+        r
         <Details name={data.title} img={data.img} id={id} />
         <GameShowcase title='Check out other games' />
       </Main>
