@@ -31,7 +31,6 @@ export default function GameSlider({ theme }: GameSliderProps) {
 
   const sliderItemRef = useCallback((node: HTMLDivElement) => {
     if (node) {
-      console.log('lmao');
       setsliderItemSize(node.getBoundingClientRect().width);
     }
   }, []);
@@ -65,7 +64,7 @@ export default function GameSlider({ theme }: GameSliderProps) {
     return () => {
       window.removeEventListener('resize', debounceHandleResize);
     };
-  }, [data, debounceHandleResize]);
+  }, [data, debounceHandleResize, theme]);
 
   //function for scrolling right
   const handleNext = () => {
@@ -118,7 +117,7 @@ export default function GameSlider({ theme }: GameSliderProps) {
       <Button title='<' action={handlePrevious}></Button>
 
       <div
-        className='overflow-hidden w-full h-[200px] sm:h-[230px] relative'
+        className='overflow-hidden w-full h-[200px] sm:h-[230px]  relative'
         ref={sliderContainer}
         //inline conditional styling-easier than tailwind conditional styling
         style={
@@ -139,7 +138,7 @@ export default function GameSlider({ theme }: GameSliderProps) {
         onTouchMove={(touchMoveEvent) => handleTouchMove(touchMoveEvent)}
         onTouchEnd={() => handleTouchEnd()}
         */
-          className={`inline-flex  transition-all ease-in-out duration-200`}
+          className={`flex transition-all ease-in-out duration-200`}
           //inline conditional styling-easier than tailwind conditional styling
           style={
             sliderSize < sliderContainerSize //adjust position of a slider
@@ -170,7 +169,8 @@ export default function GameSlider({ theme }: GameSliderProps) {
                   title={item.title}
                 ></SliderItem>
               ))
-            : data.map((item: any) => (
+            : data &&
+              data.map((item: any) => (
                 <SliderItem
                   key={item.id}
                   refs={item.id === 1 ? sliderItemRef : undefined} //prevent unnecessary re-renders by putting ref on only one item to get item's width

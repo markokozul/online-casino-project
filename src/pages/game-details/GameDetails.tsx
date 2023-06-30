@@ -8,7 +8,6 @@ import GameShowcase from '../home/GameShowcase';
 import Details from './Details';
 export default function GameDetails() {
   let { id } = useParams(); //get id of a game from url
-
   const { data, loading, error } = useFetch(
     `http://localhost:8001/games/${id}`,
     0 //set timeout to 0
@@ -21,7 +20,7 @@ export default function GameDetails() {
     <div>
       <Header />
       <Main>
-        <Details name={data.title} img={data.img} />
+        <Details name={data.title} img={data.img} id={id} />
         <GameShowcase title='Check out other games' />
       </Main>
       <Footer />

@@ -26,4 +26,5 @@ export interface GameSliderProps {
 export interface DetailsProps {
   name: string;
   img: string;
+  id: string | undefined;
 }

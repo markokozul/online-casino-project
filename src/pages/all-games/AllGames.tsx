@@ -14,6 +14,7 @@ export default function AllGames() {
           {data &&
             data.map((item: any) => (
               <img
+                key={item.id}
                 className='w-[200px] h-auto'
                 src={item.img}
                 alt=''
