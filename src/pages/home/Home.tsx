@@ -1,3 +1,4 @@
+import Form from '../../components/Form';
 import Loader from '../../components/Loader';
 import NavigateButton from '../../components/NavigateButton';
 import PaymentOptionsShowcase from '../../components/PaymentOptionsShowcase';
@@ -6,10 +7,8 @@ import Header from '../../components/layout/Header';
 import Main from '../../components/layout/Main';
 import { useAPI } from '../../context/APIContext';
 import GameShowcase from './GameShowcase';
-
 export default function Home() {
   const { loading, error } = useAPI();
-
   if (loading) return <Loader />;
   if (error) console.log(error);
   return (
