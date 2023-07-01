@@ -171,7 +171,8 @@ export default function GameSlider({ theme }: GameSliderProps) {
                 }
                 return null;
               })
-            : data.map((item: any, i: number) => (
+            : data &&
+              data.map((item: any, i: number) => (
                 <SliderItem
                   key={item.id}
                   refs={sliderItemRef} //get only first item's width(every item has same width)
