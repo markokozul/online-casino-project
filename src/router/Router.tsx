@@ -10,7 +10,11 @@ export default function Router() {
   return (
     <Routes>
       <Route path='/' element={<Home />}></Route>
-      <Route path='/all-games' element={<AllGames />}></Route>
+      <Route
+        path='/all-games'
+        element={<AllGames />}
+        key={document.location.href}
+      ></Route>
       <Route path='/details/:id' element={<GameDetails />}></Route>
       <Route
         path='/:id/play'

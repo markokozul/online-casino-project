@@ -6,19 +6,17 @@ import debounce from 'lodash.debounce'; //used for preventing unnecessary re-ren
 import { GameSliderProps } from '../../types/types';
 
 export default function GameSlider({ theme }: GameSliderProps) {
-  const { data } = useAPI(); //custom hook for Context
+  const { data } = useAPI(); //get game data from custom hook for Context
 
   const [move, setMove] = useState(0); // how much has slider moved in pixels
   const [sliderSize, setSliderSize] = useState(0);
   const [sliderContainerSize, setSliderContainerSize] = useState(0);
   const [sliderItemSize, setsliderItemSize] = useState(0); //
-  const [filteredGames, setFilteredGames] = useState<any>(null);
 
   const [resize, setResize] = useState(0);
 
   //accessing slider DOM element
   const slider = useRef<HTMLDivElement>(null);
-
   //accessing DOM elements using callback refs(cant use useRef because DOM isn't loaded on first render)
   const sliderContainer = useCallback(
     (node: HTMLDivElement) => {
@@ -26,7 +24,7 @@ export default function GameSlider({ theme }: GameSliderProps) {
         setSliderContainerSize(node.getBoundingClientRect().width);
       }
     },
-    [resize] //update slider container width when resize state changes
+    [resize] //update slider container width wresize state changes
   );
 
   const sliderItemRef = useCallback((node: HTMLDivElement) => {
@@ -37,7 +35,9 @@ export default function GameSlider({ theme }: GameSliderProps) {
 
   const handleResize = () => {
     setResize((prevValue) => prevValue + 1); //sliderContainerSize will update after resize updates
-
+    if (slider.current) {
+      console.log(slider.current.getBoundingClientRect().width);
+    }
     //update slider size(width changed after a breakpoint)
     setSliderSize(
       slider.current ? slider.current.getBoundingClientRect().width : 0
@@ -48,9 +48,6 @@ export default function GameSlider({ theme }: GameSliderProps) {
   const debounceHandleResize = useMemo(() => debounce(handleResize, 500), []);
 
   useEffect(() => {
-    if (theme) {
-      setFilteredGames(data.filter((item: any) => item.theme === theme)); //filter game data if theme is provided
-    }
     //get width of a slider when games are loaded
     if (data) {
       setSliderSize(
@@ -68,7 +65,6 @@ export default function GameSlider({ theme }: GameSliderProps) {
 
   //function for scrolling right
   const handleNext = () => {
-    console.log(move, sliderSize, sliderContainerSize, sliderItemSize);
     if (sliderSize - (Math.abs(move) + sliderItemSize) <= sliderContainerSize) {
       setMove(
         (prevValue) =>
@@ -159,21 +155,26 @@ export default function GameSlider({ theme }: GameSliderProps) {
           }
           ref={slider}
         >
-          {filteredGames
-            ? filteredGames.map((item: any) => (
+          {theme
+            ? data &&
+              data.map((item: any, i: number) => {
+                if (item.theme === theme) {
+                  return (
+                    <SliderItem
+                      key={item.id}
+                      refs={sliderItemRef} //get only first item's width(every item has same width)
+                      img={item.img}
+                      id={item.id}
+                      title={item.title}
+                    ></SliderItem>
+                  );
+                }
+                return null;
+              })
+            : data.map((item: any, i: number) => (
                 <SliderItem
                   key={item.id}
-                  refs={item.id === 1 ? sliderItemRef : undefined} //prevent unnecessary re-renders by putting ref on only one item to get item's width
-                  img={item.img}
-                  id={item.id}
-                  title={item.title}
-                ></SliderItem>
-              ))
-            : data &&
-              data.map((item: any) => (
-                <SliderItem
-                  key={item.id}
-                  refs={item.id === 1 ? sliderItemRef : undefined} //prevent unnecessary re-renders by putting ref on only one item to get item's width
+                  refs={sliderItemRef} //get only first item's width(every item has same width)
                   img={item.img}
                   id={item.id}
                   title={item.title}
