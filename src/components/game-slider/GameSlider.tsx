@@ -113,10 +113,8 @@ export default function GameSlider({ theme }: GameSliderProps) {
   */
   return (
     <div className='w-full flex items-center justify-center flex-row'>
-      <Button title='<' action={handlePrevious}></Button>
-
       <div
-        className='overflow-hidden w-full h-[200px] sm:h-[230px]  relative'
+        className='relative overflow-x-hidden w-full h-40 small:h-44 sm:h-48 lg:h-56 flex flex-row justify-between items-center'
         ref={sliderContainer}
         //inline conditional styling-easier than tailwind conditional styling
         style={
@@ -129,6 +127,12 @@ export default function GameSlider({ theme }: GameSliderProps) {
             : undefined
         }
       >
+        <button
+          onClick={handlePrevious}
+          className='z-30 bg-gradient-to-t from-[#ff9c19] to-[#ffdd2d] px-3 py-4 opacity-80 hover:opacity-100'
+        >
+          Prev
+        </button>
         <div
           /*
         onTouchStart={(touchStartEvent) =>
@@ -137,7 +141,7 @@ export default function GameSlider({ theme }: GameSliderProps) {
         onTouchMove={(touchMoveEvent) => handleTouchMove(touchMoveEvent)}
         onTouchEnd={() => handleTouchEnd()}
         */
-          className={`flex transition-all ease-in-out duration-200`}
+          className={`flex transition-all ease-in-out duration-200 h-full`}
           //inline conditional styling-easier than tailwind conditional styling
           style={
             sliderSize < sliderContainerSize //adjust position of a slider
@@ -184,8 +188,13 @@ export default function GameSlider({ theme }: GameSliderProps) {
                 ></SliderItem>
               ))}
         </div>
+        <button
+          onClick={handleNext}
+          className='z-30 bg-gradient-to-t from-[#ff9c19] to-[#ffdd2d] px-3 py-4 opacity-80 hover:opacity-100'
+        >
+          Prev
+        </button>
       </div>
-      <Button title='>' action={handleNext}></Button>
     </div>
   );
 }

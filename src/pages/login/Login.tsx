@@ -42,7 +42,7 @@ export default function Login() {
   return (
     <div>
       <Form
-        fields={{ email: 'email', password: 'password' }}
+        fields={{ email: 'email', password: 'password' }} // input name: input type
         submit={handleSubmit}
       />
     </div>
