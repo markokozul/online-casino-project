@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Form from '../../components/Form';
 import { auth } from '../../firebase/firebase';
 import { LoginFormData } from '../../types/types';
+import { useEffect } from 'react';
 
 export default function Login() {
   const navigate = useNavigate(); //used for navigating
@@ -26,6 +27,18 @@ export default function Login() {
         console.log(errorCode, errorMessage);
       });
   };
+
+  useEffect(() => {
+    const navigateToHomepage = () => {
+      navigate('/');
+    };
+    window.addEventListener('popstate', navigateToHomepage); //when button for going back is pressed on browser,redirect to homepage
+
+    return () => {
+      window.removeEventListener('popstate', navigateToHomepage); //Cleanup of event listener
+    };
+  }, []);
+
   return (
     <div>
       <Form

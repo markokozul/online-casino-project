@@ -17,6 +17,7 @@ export default function GameSlider({ theme }: GameSliderProps) {
 
   //accessing slider DOM element
   const slider = useRef<HTMLDivElement>(null);
+
   //accessing DOM elements using callback refs(cant use useRef because DOM isn't loaded on first render)
   const sliderContainer = useCallback(
     (node: HTMLDivElement) => {
@@ -30,6 +31,7 @@ export default function GameSlider({ theme }: GameSliderProps) {
   const sliderItemRef = useCallback((node: HTMLDivElement) => {
     if (node) {
       setsliderItemSize(node.getBoundingClientRect().width);
+      console.log('lol');
     }
   }, []);
 
@@ -54,14 +56,15 @@ export default function GameSlider({ theme }: GameSliderProps) {
         slider.current ? slider.current.getBoundingClientRect().width : 0
       );
     }
+  }, [data]);
 
+  useEffect(() => {
     window.addEventListener('resize', debounceHandleResize); //update state when resizing window(width of element changes)
-
     //Cleanup of event listener
     return () => {
       window.removeEventListener('resize', debounceHandleResize);
     };
-  }, [data, debounceHandleResize, theme]);
+  }, [debounceHandleResize]);
 
   //function for scrolling right
   const handleNext = () => {
@@ -157,25 +160,24 @@ export default function GameSlider({ theme }: GameSliderProps) {
         >
           {theme
             ? data &&
-              data.map((item: any, i: number) => {
-                if (item.theme === theme) {
+              data
+                .filter((item: any) => item.theme === theme) //filter items by theme then map them
+                .map((item: any, i: number) => {
                   return (
                     <SliderItem
                       key={item.id}
-                      refs={sliderItemRef} //get only first item's width(every item has same width)
+                      refs={i === 0 ? sliderItemRef : undefined} //prevent unnecessary re-renders by geting only one item's width(every item has same width)
                       img={item.img}
                       id={item.id}
                       title={item.title}
                     ></SliderItem>
                   );
-                }
-                return null;
-              })
+                })
             : data &&
               data.map((item: any, i: number) => (
                 <SliderItem
                   key={item.id}
-                  refs={sliderItemRef} //get only first item's width(every item has same width)
+                  refs={i === 0 ? sliderItemRef : undefined} //prevent unnecessary re-renders by geting only one item's width(every item has same width)
                   img={item.img}
                   id={item.id}
                   title={item.title}
