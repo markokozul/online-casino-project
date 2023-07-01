@@ -1,21 +1,21 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
+import Form from '../../components/Form';
 import { auth } from '../../firebase/firebase';
+import { RegisterFormData } from '../../types/types';
 
 export default function Register() {
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: any, data: RegisterFormData) => {
     e.preventDefault();
+
+    const { email, password } = data;
     await createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
-        navigate('/all-games');
+        navigate('/');
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -25,19 +25,10 @@ export default function Register() {
   };
   return (
     <div>
-      <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
-        <input
-          type='email'
-          placeholder='email'
-          onInput={(e: any) => setEmail(e.target.value)}
-        ></input>
-        <input
-          type='password'
-          placeholder='Password'
-          onInput={(e: any) => setPassword(e.target.value)}
-        ></input>
-        <input type='submit'></input>
-      </form>
+      <Form
+        fields={{ email: 'email', password: 'password' }}
+        submit={handleSubmit}
+      />{' '}
     </div>
   );
 }

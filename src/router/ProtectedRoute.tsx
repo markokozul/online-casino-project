@@ -1,6 +1,5 @@
-import React from 'react';
+import { Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Route, Navigate } from 'react-router-dom';
 
 //route available only when user is logged in
 export default function ProtectedRoute({ children }: any) {

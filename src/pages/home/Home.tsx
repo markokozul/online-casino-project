@@ -1,4 +1,3 @@
-import Form from '../../components/Form';
 import Loader from '../../components/Loader';
 import NavigateButton from '../../components/NavigateButton';
 import PaymentOptionsShowcase from '../../components/PaymentOptionsShowcase';
