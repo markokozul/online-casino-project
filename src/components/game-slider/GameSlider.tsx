@@ -3,7 +3,6 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useAPI } from '../../context/APIContext';
 import { GameSliderProps } from '../../types/types';
 import SliderItem from './SliderItem';
-import { toContainElement } from '@testing-library/jest-dom/matchers';
 
 export default function GameSlider({ theme }: GameSliderProps) {
   const { data } = useAPI(); //get game data from custom hook for Context
@@ -12,6 +11,7 @@ export default function GameSlider({ theme }: GameSliderProps) {
   const [sliderSize, setSliderSize] = useState(0);
   const [sliderContainerSize, setSliderContainerSize] = useState(0);
   const [sliderItemSize, setsliderItemSize] = useState(0); //
+  const [animation, setAnimation] = useState(false);
 
   const [resize, setResize] = useState(0);
 
@@ -28,18 +28,18 @@ export default function GameSlider({ theme }: GameSliderProps) {
     [resize] //update slider container width wresize state changes
   );
 
-  const sliderItemRef = useCallback((node: HTMLDivElement) => {
-    if (node) {
-      setsliderItemSize(node.getBoundingClientRect().width);
-      console.log('lol');
-    }
-  }, []);
+  const sliderItemRef = useCallback(
+    (node: HTMLDivElement) => {
+      if (node) {
+        setsliderItemSize(node.getBoundingClientRect().width);
+      }
+    },
+    [resize]
+  );
 
   const handleResize = () => {
     setResize((prevValue) => prevValue + 1); //sliderContainerSize will update after resize updates
-    if (slider.current) {
-      console.log(slider.current.getBoundingClientRect().width);
-    }
+
     //update slider size(width changed after a breakpoint)
     setSliderSize(
       slider.current ? slider.current.getBoundingClientRect().width : 0
@@ -68,6 +68,7 @@ export default function GameSlider({ theme }: GameSliderProps) {
 
   //function for scrolling right
   const handleNext = () => {
+    setAnimation(true); //set animation on slider only when clicking buttons
     if (sliderSize - (Math.abs(move) + sliderItemSize) <= sliderContainerSize) {
       setMove(
         (prevValue) =>
@@ -80,6 +81,8 @@ export default function GameSlider({ theme }: GameSliderProps) {
 
   //function for scrolling left
   const handlePrevious = () => {
+    setAnimation(true); //set animation on slider only when clicking buttons
+
     if (Math.abs(move) < sliderItemSize) {
       setMove((prevValue) => prevValue + Math.abs(move));
     } else {
@@ -92,19 +95,19 @@ export default function GameSlider({ theme }: GameSliderProps) {
   const [end, setEnd] = useState(0);
 
   function handleTouchStart(e: any) {
+    setAnimation(false); //remove animation from slider when swiping
     setTouchStart(e.targetTouches[0].clientX);
     setEnd(0);
   }
 
   function handleTouchMove(e: any) {
     setTouchEnd(e.targetTouches[0].clientX);
-
+    console.log(touchEnd);
     if (touchStart - touchEnd > 0) {
-      console.log('move', move);
-
-      if (sliderSize - Math.abs(move) > sliderContainerSize) {
+      console.log(end);
+      if (sliderSize - Math.abs(move) > sliderContainerSize && touchEnd) {
         setMove(
-          (prev) => prev + (end !== 0 ? touchEnd - end : touchEnd - touchStart)
+          (prev) => prev + (end ? touchEnd - end : touchEnd - touchStart)
         );
         setEnd(touchEnd);
       }
@@ -114,7 +117,7 @@ export default function GameSlider({ theme }: GameSliderProps) {
 
     if (touchStart - touchEnd < 0) {
       // do your stuff here for right swipe
-      if (move < 0) {
+      if (move < 0 && touchEnd) {
         setMove(
           (prev) => prev - (end !== 0 ? end - touchEnd : touchStart - touchEnd)
         );
@@ -152,7 +155,9 @@ export default function GameSlider({ theme }: GameSliderProps) {
           onTouchStart={(touchStartEvent) => handleTouchStart(touchStartEvent)}
           onTouchMove={(touchMoveEvent) => handleTouchMove(touchMoveEvent)}
           onTouchEnd={() => handleTouchEnd()}
-          className={`flex  h-full`}
+          className={`flex h-full ${
+            animation ? 'transition-all duration-200 ease-in-out' : ''
+          }`}
           //inline conditional styling-easier than tailwind conditional styling
           style={
             sliderSize < sliderContainerSize //adjust position of a slider

@@ -6,6 +6,7 @@ import Main from '../../components/layout/Main';
 import useFetch from '../../hooks/useFetch';
 import GameShowcase from '../home/GameShowcase';
 import Details from './Details';
+import Section from '../../components/layout/Section';
 export default function GameDetails() {
   let { id } = useParams(); //get id of a game from url
   const { data, loading, error } = useFetch(
@@ -20,9 +21,10 @@ export default function GameDetails() {
     <div>
       <Header />
       <Main>
-        r
-        <Details name={data.title} img={data.img} id={id} />
-        <GameShowcase title='Check out other games' />
+        <Section styling='relative bg-backgr2 bg-cover bg-center  flex items-center justify-center flex-col gap-24 px-5 py-5 h-auto lg:px-16 lg:py-36'>
+          <Details name={data.title} img={data.img} id={id} />
+          <GameShowcase title='Check out other games' />
+        </Section>
       </Main>
       <Footer />
     </div>

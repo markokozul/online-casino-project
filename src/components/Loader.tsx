@@ -3,7 +3,9 @@ import { Oval } from 'react-loader-spinner';
 
 export default function Loader() {
   return (
-    <div className='absolute h-full w-full bg-bg-main flex items-center justify-center'>
+    <div className='absolute h-full w-full bg-backgr2 bg-center bg-cover flex flex-col items-center justify-center'>
+      <img src={require('../assets/logowhite.png')} alt='loading-logo' />
+
       <Oval
         height={100}
         width={100}
@@ -13,10 +15,9 @@ export default function Loader() {
         visible={true}
         ariaLabel='oval-loading'
         secondaryColor='#ffdd2d'
-        strokeWidth={4}
-        strokeWidthSecondary={2}
+        strokeWidth={6}
+        strokeWidthSecondary={6}
       />
-      <h1>xCASINO</h1>
     </div>
   );
 }

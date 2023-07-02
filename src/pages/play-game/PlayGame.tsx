@@ -5,6 +5,7 @@ import Main from '../../components/layout/Main';
 import { useParams } from 'react-router';
 import useFetch from '../../hooks/useFetch';
 import Loader from '../../components/Loader';
+import Section from '../../components/layout/Section';
 export default function PlayGame() {
   const { id } = useParams();
 
@@ -19,7 +20,9 @@ export default function PlayGame() {
     <div>
       <Header />
       <Main>
-        <img src={data && data.img} alt=''></img>
+        <Section styling='bg-backgr3 bg-center bg-cover flex items-center justify-center py-24'>
+          <img src={data && data.img} alt=''></img>
+        </Section>
       </Main>
       <Footer />
     </div>
