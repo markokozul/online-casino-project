@@ -18,7 +18,7 @@ module.exports = {
       //main colors to use throughout the application
       colors: {
         'primary-btn': '',
-        'bg-main': '#33052a',
+        'header-bg': '#2a0070',
       },
       //hero image for homepage
       backgroundImage: {
