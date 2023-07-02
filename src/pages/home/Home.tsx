@@ -6,8 +6,12 @@ import Header from '../../components/layout/Header';
 import Main from '../../components/layout/Main';
 import { useAPI } from '../../context/APIContext';
 import GameShowcase from './GameShowcase';
+import ReactSwipe from 'react-swipe';
+import { useRef } from 'react';
+
 export default function Home() {
   const { loading, error } = useAPI();
+
   if (loading) return <Loader />;
   if (error) console.log(error);
   return (
@@ -25,6 +29,7 @@ export default function Home() {
         <GameShowcase title='Water Themed Games' theme='water' />
         <GameShowcase title='Egypt Themed Games' theme='egypt' />
       </Main>
+
       <Footer />
     </div>
   );

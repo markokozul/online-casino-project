@@ -1,9 +1,9 @@
+import debounce from 'lodash.debounce'; //used for preventing unnecessary re-renders
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useAPI } from '../../context/APIContext';
-import Button from '../Button';
-import SliderItem from './SliderItem';
-import debounce from 'lodash.debounce'; //used for preventing unnecessary re-renders
 import { GameSliderProps } from '../../types/types';
+import SliderItem from './SliderItem';
+import { toContainElement } from '@testing-library/jest-dom/matchers';
 
 export default function GameSlider({ theme }: GameSliderProps) {
   const { data } = useAPI(); //get game data from custom hook for Context
@@ -86,31 +86,45 @@ export default function GameSlider({ theme }: GameSliderProps) {
       setMove((prevValue) => prevValue + sliderItemSize);
     }
   };
-  /*
+
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
-
+  const [end, setEnd] = useState(0);
 
   function handleTouchStart(e: any) {
     setTouchStart(e.targetTouches[0].clientX);
+    setEnd(0);
   }
 
   function handleTouchMove(e: any) {
     setTouchEnd(e.targetTouches[0].clientX);
-  }
 
-  function handleTouchEnd() {
-    if (touchStart - touchEnd > 80) {
+    if (touchStart - touchEnd > 0) {
+      console.log('move', move);
+
+      if (sliderSize - Math.abs(move) > sliderContainerSize) {
+        setMove(
+          (prev) => prev + (end !== 0 ? touchEnd - end : touchEnd - touchStart)
+        );
+        setEnd(touchEnd);
+      }
+
       // do your stuff here for left swipe
-      handleNext();
     }
 
-    if (touchStart - touchEnd < -80) {
+    if (touchStart - touchEnd < 0) {
       // do your stuff here for right swipe
-      handlePrevious();
+      if (move < 0) {
+        setMove(
+          (prev) => prev - (end !== 0 ? end - touchEnd : touchStart - touchEnd)
+        );
+        setEnd(touchEnd);
+      }
     }
   }
-  */
+
+  function handleTouchEnd() {}
+
   return (
     <div className='w-full flex items-center justify-center flex-row'>
       <div
@@ -133,15 +147,12 @@ export default function GameSlider({ theme }: GameSliderProps) {
         >
           Prev
         </button>
+
         <div
-          /*
-        onTouchStart={(touchStartEvent) =>
-          handleTouchStart(touchStartEvent)
-        }
-        onTouchMove={(touchMoveEvent) => handleTouchMove(touchMoveEvent)}
-        onTouchEnd={() => handleTouchEnd()}
-        */
-          className={`flex transition-all ease-in-out duration-200 h-full`}
+          onTouchStart={(touchStartEvent) => handleTouchStart(touchStartEvent)}
+          onTouchMove={(touchMoveEvent) => handleTouchMove(touchMoveEvent)}
+          onTouchEnd={() => handleTouchEnd()}
+          className={`flex  h-full`}
           //inline conditional styling-easier than tailwind conditional styling
           style={
             sliderSize < sliderContainerSize //adjust position of a slider
