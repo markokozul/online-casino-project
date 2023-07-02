@@ -4,6 +4,8 @@ import { signOut } from 'firebase/auth';
 import { auth } from '../../firebase/firebase';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import logo from '../../assets/logowhite.png';
+
 export default function Header() {
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
@@ -21,11 +23,7 @@ export default function Header() {
   };
   return (
     <div className='absolute top-0 flex items-center justify-end gap-6 w-full min-h-[60px] px-16 bg-transparent z-50'>
-      <img
-        src={require('../../assets/logowhite.png')}
-        className='w-[150px]'
-        alt='logo'
-      />
+      <img src={logo} className='w-[150px]' alt='logo' />
       <NavigateButton title='Games' navigate={'/all-games'} />
       <NavigateButton title='home' navigate={'/'} />
 

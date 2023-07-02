@@ -1,4 +1,5 @@
 import PaymentOptionsShowcase from '../PaymentOptionsShowcase';
+import logo from '../../assets/logowhite.png';
 
 export default function Footer() {
   return (
@@ -6,11 +7,7 @@ export default function Footer() {
       <PaymentOptionsShowcase />
       <div className='flex flex-col xs:flex-row'>
         <div className='flex flex-col flex-[70] items-start justify- gap-6'>
-          <img
-            src={require('../../assets/logowhite.png')}
-            className='w-[150px]'
-            alt='logo'
-          />
+          <img src={logo} className='w-[150px]' alt='logo' />
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique,
             quo ipsam. Dolorum accusamus illo animi laudantium doloremque

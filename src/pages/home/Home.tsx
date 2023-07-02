@@ -7,6 +7,7 @@ import Main from '../../components/layout/Main';
 import Section from '../../components/layout/Section';
 import { useAPI } from '../../context/APIContext';
 import GameShowcase from './GameShowcase';
+import logo from '../../assets/logowhite.png';
 
 export default function Home() {
   const { loading, error } = useAPI();
@@ -19,11 +20,7 @@ export default function Home() {
 
       <Main>
         <Section styling='relative bg-backgr1 bg-cover bg-center  flex items-center justify-center flex-col gap-24 px-5 py-36  h-auto lg:px-16 lg:py-48'>
-          <img
-            src={require('../../assets/logowhite.png')}
-            className='w-[300px]'
-            alt='logo'
-          />{' '}
+          <img src={logo} className='w-[300px]' alt='logo' />{' '}
           <NavigateButton
             title='Join Now'
             navigate='/register'

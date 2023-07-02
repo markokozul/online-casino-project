@@ -1,10 +1,10 @@
-import React from 'react';
 import { Oval } from 'react-loader-spinner';
+import logo from '../assets/logowhite.png';
 
 export default function Loader() {
   return (
     <div className='absolute h-full w-full bg-backgr2 bg-center bg-cover flex flex-col items-center justify-center'>
-      <img src={require('../assets/logowhite.png')} alt='loading-logo' />
+      <img src={logo} alt='loading-logo' />
 
       <Oval
         height={100}
