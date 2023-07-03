@@ -1,3 +1,5 @@
+import { type } from 'os';
+
 export interface SliderItemProps {
   title: string;
   img: string;
@@ -5,13 +7,10 @@ export interface SliderItemProps {
   refs?: (node: HTMLDivElement) => void;
 }
 
-export interface NavigateButtonProps {
-  title: string;
-  navigate: string;
-}
-
 export interface ButtonProps {
   title: string;
+  type: string;
+  navigate?: string;
   action?: (e: any) => void;
 }
 
@@ -51,4 +50,10 @@ export interface FormFields {
 export interface FormProps {
   fields: FormFields;
   submit: (e: any, data: LoginFormData) => void;
+}
+
+export interface MobileSidebarProps {
+  sidebarIsOpen: boolean;
+  handleSidebar: () => void;
+  logout: () => void;
 }

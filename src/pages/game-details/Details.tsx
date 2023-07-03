@@ -1,4 +1,4 @@
-import NavigateButton from '../../components/NavigateButton';
+import Button from '../../components/Button';
 import { DetailsProps } from '../../types/types';
 
 export default function Details({ name, img, id }: DetailsProps) {
@@ -12,7 +12,7 @@ export default function Details({ name, img, id }: DetailsProps) {
           libero eveniet magnam assumenda nam totam amet. Aspernatur quod
           temporibus incidunt assumenda eaque.
         </p>
-        <NavigateButton title='Play' navigate={`/${id}/play`} />
+        <Button title='Play' navigate={`/${id}/play`} type='button' />
       </div>
       <div className='flex flex-[40]  items-center justify-center'>
         <img src={img} className='w-72 h-auto' alt=''></img>

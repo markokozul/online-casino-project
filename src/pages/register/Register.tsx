@@ -6,6 +6,7 @@ import { RegisterFormData } from '../../types/types';
 import Header from '../../components/layout/Header';
 import Main from '../../components/layout/Main';
 import Section from '../../components/layout/Section';
+import Heading from '../../components/Heading';
 export default function Register() {
   const navigate = useNavigate();
 
@@ -30,7 +31,7 @@ export default function Register() {
       <Header />
       <Main>
         <Section styling='flex flex-col justify-center items-center gap-10 px-5 py-24 h-auto lg:px-16 '>
-          <h1 className='text-5xl'>Register</h1>
+          <Heading title='Register' />
           <Form
             fields={{ email: 'email', password: 'password' }} // input name: input type
             submit={handleSubmit}

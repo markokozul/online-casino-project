@@ -27,7 +27,7 @@ export default function Form({ fields, submit }: any) {
           />
         </label>
       ))}
-      <Button title='Submit' action={handleSubmit} />
+      <Button title='Submit' type='button' action={handleSubmit} />
     </form>
   );
 }

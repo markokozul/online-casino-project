@@ -131,7 +131,7 @@ export default function GameSlider({ theme }: GameSliderProps) {
   return (
     <div className='w-full flex items-center justify-center flex-row'>
       <div
-        className='relative overflow-x-hidden w-full h-40 small:h-44 sm:h-48 lg:h-56 flex flex-row justify-between items-center'
+        className='relative overflow-hidden w-full h-40 xs:h-44 sm:h-48 lg:h-52 flex flex-row justify-between items-center'
         ref={sliderContainer}
         //inline conditional styling-easier than tailwind conditional styling
         style={

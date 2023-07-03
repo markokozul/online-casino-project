@@ -3,7 +3,7 @@ import logo from '../../assets/logowhite.png';
 
 export default function Footer() {
   return (
-    <div className='bg-backgr3 bg-center bg-cover relative text-white flex flex-col '>
+    <div className='bg-backgr3 bg-cover relative text-white flex flex-col '>
       <PaymentOptionsShowcase />
       <div className='flex flex-col xs:flex-row px-5 py-12 lg:px-16'>
         <div className='flex flex-col flex-[70] items-start  gap-6'>

@@ -7,6 +7,7 @@ import Main from '../../components/layout/Main';
 import Section from '../../components/layout/Section';
 import { auth } from '../../firebase/firebase';
 import { LoginFormData } from '../../types/types';
+import Heading from '../../components/Heading';
 
 export default function Login() {
   const navigate = useNavigate(); //used for navigating
@@ -47,7 +48,7 @@ export default function Login() {
       <Header />
       <Main>
         <Section styling='flex flex-col justify-center items-center gap-10 px-5 py-24 h-auto lg:px-16 '>
-          <h1 className='text-5xl'>Login</h1>
+          <Heading title='Login' />
           <Form
             fields={{ email: 'email', password: 'password' }} // input name: input type
             submit={handleSubmit}
