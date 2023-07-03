@@ -1,5 +1,5 @@
 import { signOut } from 'firebase/auth';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../assets/logowhite.png';
 import { useAuth } from '../../context/AuthContext';
@@ -8,7 +8,6 @@ import Button from '../Button';
 import MobileSidebar from '../MobileSidebar';
 
 export default function Header() {
-  const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
   const [backgr, setBackgr] = useState(false);
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
@@ -20,7 +19,7 @@ export default function Header() {
   const handleLogout = () => {
     signOut(auth)
       .then(() => {
-        // Sign-out successful.
+        // Sign-out successful
         navigate('/');
         console.log('Signed out successfully');
       })
@@ -29,35 +28,38 @@ export default function Header() {
       });
   };
 
-  const handleScroll = () => {
-    const currentScrollPos = window.scrollY;
-
-    if (!sidebarIsOpen) {
-      //prevent uneccessary re-renders when sidebar is opened by not allowing header animations on scroll
-      if (currentScrollPos > prevScrollPos) {
-        setVisible(false);
-      } else {
-        setVisible(true);
-      }
-
-      setPrevScrollPos(currentScrollPos);
-    }
-  };
-
   const handleSidebar = () => {
     setSidebarIsOpen((prev) => !prev);
   };
+
   useEffect(() => {
-    if (window.scrollY === 0) {
-      setBackgr(false); //if page is at the top,set transparent header background
-    } else {
-      setBackgr(true);
-    }
+    let previousScrollPosition = 0;
+    let currentScrollPosition = 0;
+
+    const handleScroll = () => {
+      // Get the new Value
+      currentScrollPosition = window.scrollY;
+
+      if (currentScrollPosition === 0) {
+        setBackgr(false);
+      } else if (currentScrollPosition > 60) {
+        setBackgr(true);
+      }
+
+      //Subtract the two and conclude
+      if (previousScrollPosition - currentScrollPosition < 0) {
+        setVisible(false);
+      } else if (previousScrollPosition - currentScrollPosition > 0) {
+        setVisible(true);
+      }
+      // Update the previous value
+      previousScrollPosition = currentScrollPosition;
+    };
 
     window.addEventListener('scroll', handleScroll);
 
-    return () => window.removeEventListener('scroll', handleScroll);
-  });
+    return () => window.removeEventListener('scroll', handleScroll); //cleanup of event listener
+  }, []);
   return (
     <>
       <div
