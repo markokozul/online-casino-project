@@ -3,7 +3,7 @@ import { DetailsProps } from '../../types/types';
 
 export default function Details({ name, img, id }: DetailsProps) {
   return (
-    <div className='w-full flex flex-col-reverse items-center justify-around sm:flex-row'>
+    <div className='w-full flex flex-col-reverse items-center justify-around sm:flex-'>
       <div className='flex flex-col gap-10 flex-[60] items-center justify-center text-white px-5 '>
         <h1>{name}</h1>
         <p className='text-center'>

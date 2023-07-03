@@ -69,26 +69,26 @@ export default function Header() {
         }  flex items-center justify-end w-full min-h-[60px] px-16  z-[51]`}
       >
         <Link to={'/'}>
-          <img src={logo} className='w-40 absolute left-8 top-2' alt='logo' />
+          <img
+            src={logo}
+            className=' hidden w-40 absolute left-8 top-2 xxs:block'
+            alt='logo'
+          />
         </Link>
 
         <div className='hidden md:flex items-center gap-6'>
           <Button title='All Games' navigate={'/all-games'} type='button' />
           {isAuthenticated ? (
-            <Button
-              title='sign out'
-              type='button'
-              action={handleLogout}
-            ></Button>
+            <Button title='sign out' action={handleLogout} type='button' />
           ) : (
             <>
-              <Button title='Login' type='link' navigate={'/login'} />
+              <Button title='Login' navigate={'/login'} type='button' />
               <Button title='Register' navigate={'/register'} type='button' />
             </>
           )}
         </div>
         <i
-          className='fa fa-bars fa-2x md:hidden text-white hover:cursor-pointer'
+          className='fa fa-bars fa-2x absolute right-0 mr-4 md:hidden text-white hover:cursor-pointer'
           onClick={handleSidebar}
           aria-hidden='true'
         ></i>

@@ -21,7 +21,7 @@ export default function GameDetails() {
     <div>
       <Header />
       <Main>
-        <Section styling='relative bg-backgr2 bg-cover bg-center  flex items-center justify-center flex-col gap-24 px-5 py-5 h-auto lg:px-16 lg:py-36'>
+        <Section styling='relative bg-backgr2 bg-cover bg-center  flex items-center justify-center flex-col gap-24 px-5 py-24 h-auto lg:px-16 lg:py-36'>
           <Details name={data.title} img={data.img} id={id} />
           <GameShowcase title='Check out other games' />
         </Section>
