@@ -21,7 +21,11 @@ export default function Home() {
       <Main>
         <Section styling='relative bg-backgr1 bg-cover bg-center  flex items-center justify-center flex-col gap-24 px-5 py-36  h-auto lg:px-16 lg:py-48'>
           <img src={logo} className='w-[300px]' alt='logo' />{' '}
-          <Button title='Join Now' navigate='/register' type='button'></Button>
+          <Button
+            title='Join Now'
+            navigate='/register'
+            styling='button'
+          ></Button>
           <PaymentOptionsShowcase position='absolute' />
         </Section>
 

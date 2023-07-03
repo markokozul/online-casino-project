@@ -18,16 +18,16 @@ export default function MobileSidebar({
       }  `}
     >
       <div onClick={() => handleSidebar()} className='flex flex-col m-5 w-full'>
-        <Button title='Home' navigate='/' type='link' />
+        <Button title='Home' navigate='/' styling='link' />
         {isAuthenticated ? (
           <>
-            <Button title='All Games' navigate='/all-games' type='link' />
-            <Button title='Sign Out' type='link' action={() => logout()} />
+            <Button title='All Games' navigate='/all-games' styling='link' />
+            <Button title='Sign Out' styling='link' action={() => logout()} />
           </>
         ) : (
           <>
-            <Button title='Login' navigate='/login' type='link' />
-            <Button title='Register' navigate='/register' type='link' />
+            <Button title='Login' navigate='/login' styling='link' />
+            <Button title='Register' navigate='/register' styling='link' />
           </>
         )}
       </div>

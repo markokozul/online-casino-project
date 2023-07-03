@@ -9,7 +9,8 @@ export interface SliderItemProps {
 
 export interface ButtonProps {
   title: string;
-  type: string;
+  styling: string;
+  type?: string;
   navigate?: string;
   action?: (e: any) => void;
 }

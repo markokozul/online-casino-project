@@ -12,7 +12,7 @@ export default function Details({ name, img, id }: DetailsProps) {
           libero eveniet magnam assumenda nam totam amet. Aspernatur quod
           temporibus incidunt assumenda eaque.
         </p>
-        <Button title='Play' navigate={`/${id}/play`} type='button' />
+        <Button title='Play' navigate={`/${id}/play`} styling='button' />
       </div>
       <div className='flex flex-[40]  items-center justify-center'>
         <img src={img} className='w-72 h-auto' alt=''></img>

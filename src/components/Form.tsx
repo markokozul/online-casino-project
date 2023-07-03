@@ -11,7 +11,7 @@ export default function Form({ fields, submit }: any) {
     });
   };
   const handleSubmit = (e: React.FormEvent<EventTarget>) => {
-    submit(e, data);
+    submit(e, data); //call handleSubmit from parent
   };
   return (
     <form className='w-[90%]  flex flex-col justify-center items-center  gap-8 px-10 py-16 bg-white/30 shadow-md rounded sm:w-96 lg:w-[500px]'>
@@ -22,12 +22,17 @@ export default function Form({ fields, submit }: any) {
             className='w-full shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
             name={item}
             type={fields[item]}
-            required
             onInput={handleInput}
+            required
           />
         </label>
       ))}
-      <Button title='Submit' type='button' action={handleSubmit} />
+      <Button
+        title='Submit'
+        styling='button'
+        action={handleSubmit}
+        type='submit'
+      />
     </form>
   );
 }
