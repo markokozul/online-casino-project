@@ -1,9 +1,12 @@
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Form from '../../components/Form';
+import Header from '../../components/layout/Header';
+import Main from '../../components/layout/Main';
+import Section from '../../components/layout/Section';
 import { auth } from '../../firebase/firebase';
 import { LoginFormData } from '../../types/types';
-import { useEffect } from 'react';
 
 export default function Login() {
   const navigate = useNavigate(); //used for navigating
@@ -41,10 +44,22 @@ export default function Login() {
 
   return (
     <div>
-      <Form
-        fields={{ email: 'email', password: 'password' }} // input name: input type
-        submit={handleSubmit}
-      />
+      <Header />
+      <Main>
+        <Section styling='flex flex-col justify-center items-center gap-10 px-5 py-24 h-auto lg:px-16 '>
+          <h1 className='text-5xl'>Login</h1>
+          <Form
+            fields={{ email: 'email', password: 'password' }} // input name: input type
+            submit={handleSubmit}
+          />
+          <p>
+            Don't have an account?Register{' '}
+            <Link to={'/register'} className='underline decoration-1'>
+              here
+            </Link>
+          </p>
+        </Section>
+      </Main>
     </div>
   );
 }

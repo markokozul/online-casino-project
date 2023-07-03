@@ -29,6 +29,7 @@ export default function Header() {
   };
 
   const handleScroll = () => {
+    console.log('lol');
     const currentScrollPos = window.scrollY;
 
     if (currentScrollPos > prevScrollPos) {
@@ -55,21 +56,20 @@ export default function Header() {
     <div
       ref={header}
       className={`${backgr ? 'bg-header-bg/80' : 'bg-transparent'} ${
-        visible ? 'fixed transition-all duration-200 ease-in-out ' : 'absolute'
+        visible ? 'fixed  transition-all duration-300 ease-linear' : 'absolute '
       }  flex items-center justify-end gap-6 w-full min-h-[60px] px-16  z-50`}
     >
       <Link to={'/'}>
         <img src={logo} className='w-40 absolute left-8 top-2' alt='logo' />
       </Link>
-      <NavigateButton title='Games' navigate={'/all-games'} />
-      <NavigateButton title='home' navigate={'/'} />
+      <NavigateButton title='All Games' navigate={'/all-games'} />
 
       {isAuthenticated ? (
         <Button title='sign out' action={handleLogout}></Button>
       ) : (
         <>
-          <NavigateButton title='register' navigate={'/register'} />
           <NavigateButton title='login' navigate={'/login'} />
+          <NavigateButton title='register' navigate={'/register'} />
         </>
       )}
     </div>

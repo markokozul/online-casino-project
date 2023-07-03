@@ -12,7 +12,7 @@ export interface NavigateButtonProps {
 
 export interface ButtonProps {
   title: string;
-  action?: () => void;
+  action?: (e: any) => void;
 }
 
 export interface GameShowcaseProps {
@@ -41,4 +41,14 @@ export interface RegisterFormData {
 
 export interface PaymentOptionsShowcaseProps {
   position?: string;
+}
+
+export interface FormFields {
+  email: string;
+  password: string;
+}
+
+export interface FormProps {
+  fields: FormFields;
+  submit: (e: any, data: LoginFormData) => void;
 }
