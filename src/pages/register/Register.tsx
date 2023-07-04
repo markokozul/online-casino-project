@@ -12,6 +12,12 @@ import { updateProfile } from 'firebase/auth';
 export default function Register() {
   const navigate = useNavigate();
 
+  const handleError = (error: string) => {
+    if (error === 'auth/email-already-in-use') {
+      alert('This email is already in use.Please try again.');
+    }
+  };
+
   const handleSubmit = async (e: any, data: RegisterFormData) => {
     e.preventDefault();
 
@@ -31,6 +37,7 @@ export default function Register() {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
+        handleError(errorCode);
       });
   };
   return (

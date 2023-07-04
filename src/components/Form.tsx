@@ -11,10 +11,14 @@ export default function Form({ fields, submit }: any) {
     });
   };
   const handleSubmit = (e: React.FormEvent<EventTarget>) => {
+    e.preventDefault();
     submit(e, data); //call handleSubmit from parent
   };
   return (
-    <form className='w-[90%]  flex flex-col justify-center items-center  gap-8 px-10 py-16 bg-white/30 shadow-md rounded sm:w-96 lg:w-[500px]'>
+    <form
+      onSubmit={handleSubmit}
+      className='w-[90%]  flex flex-col justify-center items-center  gap-8 px-10 py-16 bg-white/30 shadow-md rounded sm:w-96 lg:w-[500px]'
+    >
       {Object.keys(fields).map((item: string, i) => (
         <label htmlFor={item} key={i} className='w-full '>
           <span>{item}</span>
@@ -23,16 +27,13 @@ export default function Form({ fields, submit }: any) {
             name={item}
             type={fields[item]}
             onInput={handleInput}
+            minLength={fields[item] === 'password' ? 6 : 1}
+            maxLength={fields[item] === 'password' ? 20 : 40}
             required
           />
         </label>
       ))}
-      <Button
-        title='Submit'
-        styling='button'
-        action={handleSubmit}
-        type='submit'
-      />
+      <Button title='Submit' styling='button' type='submit' />
     </form>
   );
 }

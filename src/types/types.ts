@@ -52,6 +52,7 @@ export interface FormFields {
 export interface FormProps {
   fields: FormFields;
   submit: (e: any, data: LoginFormData) => void;
+  isLoading?: boolean;
 }
 
 export interface MobileSidebarProps {

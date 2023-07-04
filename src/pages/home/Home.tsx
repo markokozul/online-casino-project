@@ -1,13 +1,12 @@
 import Loader from '../../components/Loader';
-import Button from '../../components/Button';
 import PaymentOptionsShowcase from '../../components/PaymentOptionsShowcase';
+import PromoSlider from '../../components/PromoSlider';
 import Footer from '../../components/layout/Footer';
 import Header from '../../components/layout/Header';
 import Main from '../../components/layout/Main';
 import Section from '../../components/layout/Section';
 import { useAPI } from '../../context/APIContext';
 import GameShowcase from './GameShowcase';
-import logo from '../../assets/logowhite.png';
 
 export default function Home() {
   const { loading, error } = useAPI();
@@ -19,13 +18,8 @@ export default function Home() {
       <Header />
 
       <Main>
-        <Section styling='relative bg-backgr1 bg-cover bg-center  flex items-center justify-center flex-col gap-24 px-5 py-36  h-auto lg:px-16 lg:py-48'>
-          <img src={logo} className='w-[300px]' alt='logo' />{' '}
-          <Button
-            title='Join Now'
-            navigate='/register'
-            styling='button'
-          ></Button>
+        <Section styling='relative bg-backgr1 bg-cover bg-center  flex items-center justify-center flex-col gap-24 px-5 py-24  h-auto lg:px-16 lg:py-40'>
+          <PromoSlider />
           <PaymentOptionsShowcase position='absolute' />
         </Section>
 

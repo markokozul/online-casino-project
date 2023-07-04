@@ -68,13 +68,16 @@ export default function GameSlider({ theme }: GameSliderProps) {
 
   //function for scrolling right
   const handleNext = () => {
-    setAnimation(true); //set animation on slider only when clicking buttons
+    setAnimation(true); //set animation on slider only when clicking buttons(not when sliding)
     if (sliderSize - (Math.abs(move) + sliderItemSize) <= sliderContainerSize) {
       setMove(
         (prevValue) =>
           prevValue - (sliderSize - Math.abs(move) - sliderContainerSize)
       );
-    } else {
+    } else if (
+      sliderSize - (Math.abs(move) + sliderItemSize) >
+      sliderContainerSize
+    ) {
       setMove((prevValue) => prevValue - sliderItemSize);
     }
   };
@@ -131,7 +134,7 @@ export default function GameSlider({ theme }: GameSliderProps) {
   return (
     <div className='w-full flex items-center justify-center flex-row'>
       <div
-        className='relative overflow-hidden w-full h-40 xs:h-44 sm:h-48 lg:h-52 flex flex-row justify-between items-center'
+        className='group relative overflow-hidden w-full h-40 xs:h-44 sm:h-48 lg:h-52 flex flex-row justify-between items-center'
         ref={sliderContainer}
         //inline conditional styling-easier than tailwind conditional styling
         style={
@@ -145,10 +148,11 @@ export default function GameSlider({ theme }: GameSliderProps) {
         }
       >
         <button
+          disabled={move === 0 ? true : false}
           onClick={handlePrevious}
-          className='z-30 bg-gradient-to-t from-[#ff9c19] to-[#ffdd2d] px-3 py-4 opacity-80 hover:opacity-100'
+          className='z-30 bg-gradient-to-t from-[#ff9c19] to-[#ffdd2d] text-white rounded px-4 py-4 group-hover:opacity-90 opacity-0 '
         >
-          Prev
+          <i className='fa fa-chevron-left' aria-hidden='true'></i>
         </button>
 
         <div
@@ -205,10 +209,13 @@ export default function GameSlider({ theme }: GameSliderProps) {
               ))}
         </div>
         <button
+          disabled={
+            sliderSize - Math.abs(move) <= sliderContainerSize ? true : false
+          }
           onClick={handleNext}
-          className='z-30 bg-gradient-to-t from-[#ff9c19] to-[#ffdd2d] px-3 py-4 opacity-80 hover:opacity-100'
+          className='z-30 bg-gradient-to-t from-[#ff9c19] to-[#ffdd2d] text-white px-4 py-4 rounded group-hover:opacity-90 opacity-0 '
         >
-          Prev
+          <i className='fa fa-chevron-right' aria-hidden='true'></i>
         </button>
       </div>
     </div>
