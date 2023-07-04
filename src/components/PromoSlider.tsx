@@ -26,15 +26,18 @@ export default function PromoSlider() {
   const handleTouchStart = (e: any) => {
     setTouchEnd(0);
     setTouchStart(e.targetTouches[0].clientX);
-    console.log('start', touchStart);
   };
   const handleTouchMove = (e: any) => {
     setTouchEnd(e.targetTouches[0].clientX);
-    console.log('end', touchEnd);
   };
   const handleTouchEnd = (e: any) => {
-    if (touchStart - touchEnd > 100) handleNext();
-    else if (touchStart - touchEnd < 100) handlePrevious();
+    if (touchEnd && touchStart - touchEnd > 60) {
+      console.log(touchStart - touchEnd);
+      handleNext();
+    } else if (touchEnd && touchStart - touchEnd < -60) {
+      console.log('lol');
+      handlePrevious();
+    }
   };
 
   return (
