@@ -1,15 +1,14 @@
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Form from '../../components/Form';
+import Heading from '../../components/Heading';
+import MiniLoader from '../../components/MiniLoader';
 import Header from '../../components/layout/Header';
 import Main from '../../components/layout/Main';
 import Section from '../../components/layout/Section';
 import { auth } from '../../firebase/firebase';
 import { LoginFormData } from '../../types/types';
-import Heading from '../../components/Heading';
-import { useState } from 'react';
-import Loader from '../../components/Loader';
 
 export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
@@ -44,9 +43,7 @@ export default function Login() {
         console.log(errorCode, errorMessage);
         handleError(errorCode);
       })
-      .finally(() => {
-        setIsLoading(false);
-      });
+      .finally(() => setIsLoading(false));
   };
 
   useEffect(() => {
@@ -64,10 +61,9 @@ export default function Login() {
     <div>
       <Header />
       <Main>
-        {isLoading ? <Loader /> : ''}
-
         <Section styling='flex flex-col justify-center items-center gap-10 px-5 py-24 h-auto lg:px-16 '>
           <Heading title='Login' />
+          {isLoading ? <MiniLoader /> : ''}
           <Form
             fields={{
               // input name: input type

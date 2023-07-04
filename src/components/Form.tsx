@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { FormProps, LoginFormData } from '../types/types';
 import Button from './Button';
 
 export default function Form({ fields, submit }: any) {
@@ -33,6 +32,7 @@ export default function Form({ fields, submit }: any) {
           />
         </label>
       ))}
+
       <Button title='Submit' styling='button' type='submit' />
     </form>
   );

@@ -8,8 +8,12 @@ import Main from '../../components/layout/Main';
 import Section from '../../components/layout/Section';
 import Heading from '../../components/Heading';
 import { updateProfile } from 'firebase/auth';
+import { useState } from 'react';
+import MiniLoader from '../../components/MiniLoader';
 
 export default function Register() {
+  const [isLoading, setIsLoading] = useState(false);
+
   const navigate = useNavigate();
 
   const handleError = (error: string) => {
@@ -20,7 +24,7 @@ export default function Register() {
 
   const handleSubmit = async (e: any, data: RegisterFormData) => {
     e.preventDefault();
-
+    setIsLoading(true);
     const { email, password } = data;
     const { username } = data;
     await createUserWithEmailAndPassword(auth, email, password)
@@ -38,7 +42,8 @@ export default function Register() {
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
         handleError(errorCode);
-      });
+      })
+      .finally(() => setIsLoading(false));
   };
   return (
     <div>
@@ -46,6 +51,8 @@ export default function Register() {
       <Main>
         <Section styling='flex flex-col justify-center items-center gap-10 px-5 py-24 h-auto lg:px-16 '>
           <Heading title='Register' />
+          {isLoading ? <MiniLoader /> : ''}
+
           <Form
             fields={{
               username: 'text',
