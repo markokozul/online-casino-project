@@ -8,6 +8,10 @@ import Button from './Button';
 export default function PromoSlider() {
   const [activeIndex, setActiveIndex] = useState(0);
 
+  //used for swiping
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+
   let arr = [img1, img2, img3];
 
   const handleNext = () => {
@@ -19,10 +23,27 @@ export default function PromoSlider() {
     else setActiveIndex((prev) => prev - 1);
   };
 
+  const handleTouchStart = (e: any) => {
+    setTouchEnd(0);
+    setTouchStart(e.targetTouches[0].clientX);
+    console.log('start', touchStart);
+  };
+  const handleTouchMove = (e: any) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+    console.log('end', touchEnd);
+  };
+  const handleTouchEnd = (e: any) => {
+    if (touchStart - touchEnd > 100) handleNext();
+    else if (touchStart - touchEnd < 100) handlePrevious();
+  };
+
   return (
     <div className='relative w-full h-96'>
       {arr.map((item: string, i: number) => (
         <div
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
           key={i}
           className={`absolute inset-0 w-full xs:px-5 md:px-24 flex flex-col md:flex-row items-center justify-center gap-10 z-30 transition-all ease-in duration-300 ${
             i === activeIndex ? 'opacity-100' : 'opacity-0'

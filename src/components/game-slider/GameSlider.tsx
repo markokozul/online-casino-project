@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useAPI } from '../../context/APIContext';
 import { GameSliderProps } from '../../types/types';
 import SliderItem from './SliderItem';
+import { handleTouchStart, handleTouchMove } from './Swiping';
 
 export default function GameSlider({ theme }: GameSliderProps) {
   const { data } = useAPI(); //get game data from custom hook for Context
@@ -10,10 +11,14 @@ export default function GameSlider({ theme }: GameSliderProps) {
   const [move, setMove] = useState(0); // how much has slider moved in pixels
   const [sliderSize, setSliderSize] = useState(0);
   const [sliderContainerSize, setSliderContainerSize] = useState(0);
-  const [sliderItemSize, setsliderItemSize] = useState(0); //
-  const [animation, setAnimation] = useState(false);
-
+  const [sliderItemSize, setsliderItemSize] = useState(0);
   const [resize, setResize] = useState(0);
+
+  //used for swiping
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+  const [prevTouchEnd, setPrevTouchEnd] = useState(0);
+  const [animation, setAnimation] = useState(false);
 
   //accessing slider DOM element
   const slider = useRef<HTMLDivElement>(null);
@@ -93,50 +98,6 @@ export default function GameSlider({ theme }: GameSliderProps) {
     }
   };
 
-  const [touchStart, setTouchStart] = useState(0);
-  const [touchEnd, setTouchEnd] = useState(0);
-  const [prevTouchEnd, setPrevTouchEnd] = useState(0);
-
-  function handleTouchStart(e: any) {
-    setAnimation(false); //remove animation from slider when swiping
-    setTouchStart(e.targetTouches[0].clientX);
-    setPrevTouchEnd(0);
-  }
-
-  function handleTouchMove(e: any) {
-    setTouchEnd(e.targetTouches[0].clientX);
-    if (touchStart - touchEnd > 0) {
-      if (sliderSize - Math.abs(move) > sliderContainerSize && touchEnd) {
-        setMove(
-          (prev) =>
-            move -
-            2 + //speed up sliding
-            (prevTouchEnd ? touchEnd - prevTouchEnd : touchEnd - touchStart)
-        );
-        setPrevTouchEnd(touchEnd);
-      }
-
-      // do your stuff here for left swipe
-    }
-
-    if (touchStart - touchEnd < 0) {
-      // do your stuff here for right swipe
-      if (move < 0 && touchEnd) {
-        setMove(
-          (prev) =>
-            move +
-            2 - //speed up sliding
-            (prevTouchEnd ? prevTouchEnd - touchEnd : touchStart - touchEnd)
-        );
-        setPrevTouchEnd(touchEnd);
-      } else if (move >= 0) {
-        setMove(0);
-      }
-    }
-  }
-
-  function handleTouchEnd() {}
-
   return (
     <div className='w-full flex items-center justify-center flex-row'>
       <div
@@ -162,9 +123,29 @@ export default function GameSlider({ theme }: GameSliderProps) {
         </button>
 
         <div
-          onTouchStart={(touchStartEvent) => handleTouchStart(touchStartEvent)}
-          onTouchMove={(touchMoveEvent) => handleTouchMove(touchMoveEvent)}
-          onTouchEnd={() => handleTouchEnd()}
+          onTouchStart={(e) =>
+            handleTouchStart(
+              e,
+              setTouchStart,
+              setTouchEnd,
+              setPrevTouchEnd,
+              setAnimation
+            )
+          }
+          onTouchMove={(e) =>
+            handleTouchMove(
+              e,
+              touchStart,
+              touchEnd,
+              sliderSize,
+              move,
+              setMove,
+              sliderContainerSize,
+              prevTouchEnd,
+              setPrevTouchEnd,
+              setTouchEnd
+            )
+          }
           className={`flex h-full ${
             animation ? 'transition-all duration-200 ease-in-out' : ''
           }`}
