@@ -4,8 +4,13 @@ import img2 from '../assets/img2.png';
 import img3 from '../assets/img3.png';
 import logo from '../assets/logowhite.png';
 import Button from './Button';
+import { useAuth } from '../context/AuthContext';
+import { useEffect } from 'react';
+import { time } from 'console';
 
 export default function PromoSlider() {
+  const { isAuthenticated } = useAuth();
+
   const [activeIndex, setActiveIndex] = useState(0);
 
   //used for swiping
@@ -13,7 +18,6 @@ export default function PromoSlider() {
   const [touchEnd, setTouchEnd] = useState(0);
 
   let arr = [img1, img2, img3];
-
   const handleNext = () => {
     if (activeIndex < arr.length - 1) setActiveIndex((prev) => prev + 1);
     else setActiveIndex(0);
@@ -39,6 +43,12 @@ export default function PromoSlider() {
       handlePrevious();
     }
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      handleNext();
+    }, 7000); //show next slide every 7 seconds
+  });
 
   return (
     <div className='relative w-full h-96'>
@@ -66,11 +76,15 @@ export default function PromoSlider() {
                 Tenetur soluta dolorum temporibus voluptas dolorem.
               </p>
             )}
-            <Button
-              title='Join Now'
-              styling='button'
-              navigate='/register'
-            ></Button>
+            {isAuthenticated ? (
+              ''
+            ) : (
+              <Button
+                title='Join Now'
+                styling='button'
+                navigate='/register'
+              ></Button>
+            )}
           </div>
           <img
             src={item}
