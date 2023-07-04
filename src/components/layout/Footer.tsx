@@ -1,6 +1,7 @@
 import PaymentOptionsShowcase from '../PaymentOptionsShowcase';
 import logo from '../../assets/logowhite.png';
 import Button from '../Button';
+import { Link } from 'react-router-dom';
 
 export default function Footer() {
   return (
@@ -8,7 +9,9 @@ export default function Footer() {
       <PaymentOptionsShowcase />
       <div className='flex flex-col items-center justify-center gap-6 xs:flex-row px-5 py-12 lg:px-16'>
         <div className='flex flex-col flex-[70] items-start  gap-6'>
-          <img src={logo} className='w-[150px]' alt='logo' />
+          <Link to={'/'}>
+            <img src={logo} className='w-[150px]' alt='logo' />
+          </Link>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique,
             quo ipsam. Dolorum accusamus illo animi laudantium doloremque

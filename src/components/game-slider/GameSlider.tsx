@@ -95,24 +95,25 @@ export default function GameSlider({ theme }: GameSliderProps) {
 
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
-  const [end, setEnd] = useState(0);
+  const [prevTouchEnd, setPrevTouchEnd] = useState(0);
 
   function handleTouchStart(e: any) {
     setAnimation(false); //remove animation from slider when swiping
     setTouchStart(e.targetTouches[0].clientX);
-    setEnd(0);
+    setPrevTouchEnd(0);
   }
 
   function handleTouchMove(e: any) {
     setTouchEnd(e.targetTouches[0].clientX);
-    console.log(touchEnd);
     if (touchStart - touchEnd > 0) {
-      console.log(end);
       if (sliderSize - Math.abs(move) > sliderContainerSize && touchEnd) {
         setMove(
-          (prev) => prev + (end ? touchEnd - end : touchEnd - touchStart)
+          (prev) =>
+            move -
+            2 + //speed up sliding
+            (prevTouchEnd ? touchEnd - prevTouchEnd : touchEnd - touchStart)
         );
-        setEnd(touchEnd);
+        setPrevTouchEnd(touchEnd);
       }
 
       // do your stuff here for left swipe
@@ -122,9 +123,14 @@ export default function GameSlider({ theme }: GameSliderProps) {
       // do your stuff here for right swipe
       if (move < 0 && touchEnd) {
         setMove(
-          (prev) => prev - (end !== 0 ? end - touchEnd : touchStart - touchEnd)
+          (prev) =>
+            move +
+            2 - //speed up sliding
+            (prevTouchEnd ? prevTouchEnd - touchEnd : touchStart - touchEnd)
         );
-        setEnd(touchEnd);
+        setPrevTouchEnd(touchEnd);
+      } else if (move >= 0) {
+        setMove(0);
       }
     }
   }
@@ -148,7 +154,7 @@ export default function GameSlider({ theme }: GameSliderProps) {
         }
       >
         <button
-          disabled={move === 0 ? true : false}
+          disabled={move >= 0 ? true : false}
           onClick={handlePrevious}
           className='z-30 bg-gradient-to-t from-[#ff9c19] to-[#ffdd2d] text-white rounded px-4 py-4 group-hover:opacity-90 opacity-0 '
         >
