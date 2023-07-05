@@ -6,6 +6,7 @@ import Section from '../../components/layout/Section';
 import { Link } from 'react-router-dom';
 import Loader from '../../components/Loader';
 import Heading from '../../components/Heading';
+import Footer from '../../components/layout/Footer';
 
 export default function AllGames() {
   const { data, loading, error } = useAPI();
@@ -34,6 +35,7 @@ export default function AllGames() {
           </div>
         </Section>
       </Main>
+      <Footer />
     </div>
   );
 }

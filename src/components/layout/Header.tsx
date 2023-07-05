@@ -81,7 +81,7 @@ export default function Header() {
         <div className='hidden md:flex items-center gap-6'>
           <Button title='All Games' navigate={'/all-games'} styling='button' />
           {isAuthenticated ? (
-            <Button title='sign out' action={handleLogout} styling='button' />
+            <Button title='Sign Out' action={handleLogout} styling='button' />
           ) : (
             <>
               <Button title='Login' navigate={'/login'} styling='button' />

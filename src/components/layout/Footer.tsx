@@ -1,9 +1,27 @@
 import PaymentOptionsShowcase from '../PaymentOptionsShowcase';
 import logo from '../../assets/logowhite.png';
 import Button from '../Button';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
+import { signOut } from '@firebase/auth';
+import { auth } from '../../firebase/firebase';
 
 export default function Footer() {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful
+        navigate('/');
+        console.log('Signed out successfully');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const { isAuthenticated } = useAuth();
   return (
     <div className='bg-backgr3 bg-cover relative text-white flex flex-col text-xs xs:text-base'>
       <PaymentOptionsShowcase />
@@ -20,8 +38,20 @@ export default function Footer() {
           </p>
         </div>
         <div className='flex flex-col xs-flex-row flex-[30] items-center justify-center gap-6'>
-          <Button title='Login' navigate='/login' styling='link'></Button>
-          <Button title='Register' navigate='/Register' styling='link'></Button>
+          <Button title='All Games' navigate={'/all-games'} styling='link' />
+
+          {isAuthenticated ? (
+            <Button title='Sign Out' action={handleLogout} styling='link' />
+          ) : (
+            <>
+              <Button title='Login' navigate='/login' styling='link'></Button>
+              <Button
+                title='Register'
+                navigate='/Register'
+                styling='link'
+              ></Button>
+            </>
+          )}
         </div>
       </div>
     </div>

@@ -62,10 +62,10 @@ export default function PromoSlider() {
             i === activeIndex ? 'opacity-100' : 'opacity-0'
           }`}
         >
-          <div className='flex flex-col items-center justify-center gap-12'>
+          <div className='flex flex-col items-center justify-center gap-6'>
             <img src={logo} alt='' className='w-64'></img>
             {i % 2 === 0 ? (
-              <p className='flex-[60] text-center  px-12'>
+              <p className='flex-[60] text-center px-12 md:px-0 lg:px-12 xl:px-24'>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                 Tenetur soluta dolorum temporibus voluptas dolorem, magni ipsum
                 dicta beatae quasi voluptatum doloribus.
