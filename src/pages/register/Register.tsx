@@ -13,12 +13,15 @@ import MiniLoader from '../../components/MiniLoader';
 
 export default function Register() {
   const [isLoading, setIsLoading] = useState(false);
+  const [displayError, setDisplayError] = useState('');
 
   const navigate = useNavigate();
 
   const handleError = (error: string) => {
     if (error === 'auth/email-already-in-use') {
-      alert('This email is already in use.Please try again.');
+      setDisplayError(
+        'This email is already in use.Please try again with different email address.'
+      );
     }
   };
 
@@ -49,7 +52,7 @@ export default function Register() {
     <div>
       <Header />
       <Main>
-        <Section styling='flex flex-col justify-center items-center  px-5 py-24 h-auto lg:px-16 '>
+        <Section styling='flex flex-col justify-center items-center  px-1 xxs:px-5 py-24 h-auto lg:px-16 '>
           <Heading title='Register' />
           {isLoading ? <MiniLoader /> : ''}
 
@@ -60,10 +63,11 @@ export default function Register() {
               password: 'password',
             }} // input name: input type
             submit={handleSubmit}
+            displayError={displayError}
           />
           <p>
             Already have an account?Login{' '}
-            <Link to={'/register'} className='underline decoration-1'>
+            <Link to={'/login'} className='underline decoration-1'>
               here
             </Link>
           </p>

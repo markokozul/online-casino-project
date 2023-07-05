@@ -17,12 +17,12 @@ export default function Home() {
     <div>
       <Header />
       <Main>
-        <Section styling='relative bg-backgr1 bg-cover bg-center  flex items-center justify-center flex-col gap-24 px-5 py-24  h-auto lg:px-16 lg:py-40'>
+        <Section styling='relative bg-backgr1 bg-cover bg-center  flex items-center justify-center flex-col gap-24 px-5 py-20 h-auto lg:px-16 lg:py-40'>
           <PromoSlider />
           <PaymentOptionsShowcase position='absolute' />
         </Section>
 
-        <Section styling='bg-backgr3 bg-cover bg-center  flex items-center justify-center flex-col gap-24 px-5 py-5 h-auto lg:px-16 lg:py-10'>
+        <Section styling='bg-backgr3 bg-cover bg-center  flex items-center justify-center flex-col gap-16 px-5 py-12 h-auto lg:px-16 lg:gap-24 lg:py-20'>
           <GameShowcase title='Popular Games' />
           <GameShowcase title='Water Themed Games' theme='water' />
           <GameShowcase title='Egypt Themed Games' theme='egypt' />

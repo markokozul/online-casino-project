@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Button from './Button';
 
-export default function Form({ fields, submit }: any) {
+export default function Form({ fields, submit, displayError }: any) {
   const [data, setData] = useState({});
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -16,13 +16,19 @@ export default function Form({ fields, submit }: any) {
   return (
     <form
       onSubmit={handleSubmit}
-      className='w-[90%]  flex flex-col justify-center items-center  gap-8 px-10 py-16 bg-white/30 shadow-md rounded sm:w-96 lg:w-[500px]'
+      className='w-[90%] xs:w-96 lg:w-[500px] xl:w-[650px]  flex flex-col justify-center items-center  gap-8 px-4 xxs:px-8 py-16 xl:py-20  bg-white/40 shadow-md rounded  '
     >
+      {displayError ? (
+        <p className='text-red-900 text-center'>{displayError}</p>
+      ) : (
+        ''
+      )}
+
       {Object.keys(fields).map((item: string, i) => (
-        <label htmlFor={item} key={i} className='w-full '>
+        <label htmlFor={item} key={i} className='w-full max-w-[400px]'>
           <span>{item}</span>
           <input
-            className='w-full shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+            className={`w-full max-w-[400px] shadow appearance-none border rounded py-2 px-3  text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
             name={item}
             type={fields[item]}
             onInput={handleInput}

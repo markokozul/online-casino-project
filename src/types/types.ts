@@ -1,5 +1,3 @@
-import { type } from 'os';
-
 export interface SliderItemProps {
   title: string;
   img: string;
@@ -52,6 +50,7 @@ export interface FormFields {
 export interface FormProps {
   fields: FormFields;
   submit: (e: any, data: LoginFormData) => void;
+  displayError: string;
 }
 
 export interface MobileSidebarProps {

@@ -10,6 +10,8 @@ import { useEffect, useRef } from 'react';
 export default function PromoSlider() {
   const { isAuthenticated } = useAuth();
 
+  const timeoutRef = useRef(0);
+
   const [activeIndex, setActiveIndex] = useState(0);
 
   //used for swiping
@@ -43,8 +45,6 @@ export default function PromoSlider() {
     }
   };
 
-  const timeoutRef = useRef<any>();
-
   function resetTimeout() {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
@@ -52,9 +52,9 @@ export default function PromoSlider() {
   }
   useEffect(() => {
     resetTimeout();
-    timeoutRef.current = setTimeout(() => {
+    timeoutRef.current = window.setTimeout(() => {
       handleNext();
-    }, 2000);
+    }, 7000);
 
     //show next slide every 7 seconds
 

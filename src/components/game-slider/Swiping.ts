@@ -23,6 +23,7 @@ function handleTouchMove(
   setPrevTouchEnd: any,
   setTouchEnd: any
 ) {
+  // document.body.style.overflowY = 'hidden'; //disable vertical scroll on a page when swiping through slider
   setTouchEnd(e.targetTouches[0].clientX);
   if (touchStart - touchEnd > 0) {
     if (sliderSize - Math.abs(move) > sliderContainerSize && touchEnd) {

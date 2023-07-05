@@ -12,15 +12,15 @@ import { LoginFormData } from '../../types/types';
 
 export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
+  const [displayError, setDisplayError] = useState('');
 
   const navigate = useNavigate(); //used for navigating
 
   const handleError = (error: string) => {
-    if (error === 'auth/wrong-password') {
-      alert('Your password is wrong.Please try again.');
-    } else if (error === 'auth/weak-password') {
-      alert('Password should be artl.Please try again.');
-    }
+    if (error === 'auth/wrong-password')
+      setDisplayError('Your password is wrong.Please try again.');
+    else if (error === 'auth/user-not-found')
+      setDisplayError('User not found.Please try again.');
   };
 
   const handleSubmit = async (
@@ -61,7 +61,7 @@ export default function Login() {
     <div>
       <Header />
       <Main>
-        <Section styling='flex flex-col justify-center items-center gap-10 px-5 py-24 h-auto lg:px-16 '>
+        <Section styling='flex flex-col justify-center items-center px-1 xxs:px-5 py-16 sm:py-24 h-screen lg:px-16'>
           <Heading title='Login' />
           {isLoading ? <MiniLoader /> : ''}
           <Form
@@ -71,6 +71,7 @@ export default function Login() {
               password: 'password',
             }}
             submit={handleSubmit}
+            displayError={displayError}
           />
           <p>
             Don't have an account?Register{' '}
