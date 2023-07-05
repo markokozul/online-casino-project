@@ -49,7 +49,7 @@ export default function Register() {
     <div>
       <Header />
       <Main>
-        <Section styling='flex flex-col justify-center items-center gap-10 px-5 py-24 h-auto lg:px-16 '>
+        <Section styling='flex flex-col justify-center items-center  px-5 py-24 h-auto lg:px-16 '>
           <Heading title='Register' />
           {isLoading ? <MiniLoader /> : ''}
 

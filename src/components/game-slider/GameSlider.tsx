@@ -109,7 +109,7 @@ export default function GameSlider({ theme }: GameSliderProps) {
             ? {
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center',
+                justifyContent: 'flex-start',
               }
             : undefined
         }

@@ -18,7 +18,7 @@ export default function AllGames() {
     <div>
       <Header />
       <Main>
-        <Section styling='bg-backgr3 bg-cover bg-center  flex items-center justify-center flex-col gap-12 px-5 py-32 h-auto lg:px-16 '>
+        <Section styling='bg-backgr3 bg-cover bg-center  flex items-center justify-center flex-col gap-12 px-5 py-24 h-auto lg:px-16 '>
           <Heading title='All Games' />
           <div className='flex items-center justify-center flex-row flex-wrap gap-2'>
             {data &&

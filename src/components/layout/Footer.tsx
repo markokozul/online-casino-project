@@ -23,7 +23,7 @@ export default function Footer() {
 
   const { isAuthenticated } = useAuth();
   return (
-    <div className='bg-backgr3 bg-cover relative text-white flex flex-col text-xs xs:text-base'>
+    <div className='bg-backgr3 bg-cover relative text-white flex flex-col text-sm xs:text-base xxl:text-lg'>
       <PaymentOptionsShowcase />
       <div className='flex flex-col items-center justify-center gap-6 xs:flex-row px-5 py-12 lg:px-16'>
         <div className='flex flex-col flex-[70] items-start  gap-6'>

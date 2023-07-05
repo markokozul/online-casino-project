@@ -5,8 +5,7 @@ import img3 from '../assets/img3.png';
 import logo from '../assets/logowhite.png';
 import Button from './Button';
 import { useAuth } from '../context/AuthContext';
-import { useEffect } from 'react';
-import { time } from 'console';
+import { useEffect, useRef } from 'react';
 
 export default function PromoSlider() {
   const { isAuthenticated } = useAuth();
@@ -44,10 +43,22 @@ export default function PromoSlider() {
     }
   };
 
+  const timeoutRef = useRef<any>();
+
+  function resetTimeout() {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+  }
   useEffect(() => {
-    setTimeout(() => {
+    resetTimeout();
+    timeoutRef.current = setTimeout(() => {
       handleNext();
-    }, 7000); //show next slide every 7 seconds
+    }, 2000);
+
+    //show next slide every 7 seconds
+
+    return () => resetTimeout();
   });
 
   return (
@@ -71,7 +82,7 @@ export default function PromoSlider() {
                 dicta beatae quasi voluptatum doloribus.
               </p>
             ) : (
-              <p className='flex-[60] text-center px-12 '>
+              <p className='flex-[60] text-center px-12'>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                 Tenetur soluta dolorum temporibus voluptas dolorem.
               </p>
