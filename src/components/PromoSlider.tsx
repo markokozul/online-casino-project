@@ -28,6 +28,7 @@ export default function PromoSlider() {
     else setActiveIndex((prev) => prev - 1);
   };
 
+  //used for swiping
   const handleTouchStart = (e: any) => {
     setTouchEnd(0);
     setTouchStart(e.targetTouches[0].clientX);
@@ -40,7 +41,6 @@ export default function PromoSlider() {
       console.log(touchStart - touchEnd);
       handleNext();
     } else if (touchEnd && touchStart - touchEnd < -60) {
-      console.log('lol');
       handlePrevious();
     }
   };
@@ -52,6 +52,7 @@ export default function PromoSlider() {
   }
   useEffect(() => {
     resetTimeout();
+
     timeoutRef.current = window.setTimeout(() => {
       handleNext();
     }, 7000);
@@ -75,7 +76,7 @@ export default function PromoSlider() {
         >
           <div className='flex flex-col items-center justify-center gap-6'>
             <img src={logo} alt='' className='w-64'></img>
-            {i % 2 === 0 ? (
+            {i % 2 === 0 ? ( //changing text based on even numbers(purely for a showcase of two different text sizes on a slider)
               <p className='flex-[60] text-center px-12 md:px-0 lg:px-12 xl:px-24'>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                 Tenetur soluta dolorum temporibus voluptas dolorem, magni ipsum
@@ -118,13 +119,14 @@ export default function PromoSlider() {
       >
         <i className='fa fa-chevron-left fa-2x' aria-hidden='true'></i>
       </button>
-      <div className='absolute bottom-0 left-0 right-0 flex flex-row items-center justify-center gap-4 '>
+      <div className='absolute bottom-0 left-0 right-0 flex flex-row items-center justify-center gap-4 z-30'>
         {arr.map((item: string, i: number) => (
           <div
             key={i}
-            className={` w-3 h-3 rounded-full  ${
+            className={` w-3 h-3 rounded-full hover:cursor-pointer  ${
               activeIndex === i ? 'bg-[#ff9c19]' : 'bg-white'
             }`}
+            onClick={() => setActiveIndex(i)}
           ></div>
         ))}
       </div>
