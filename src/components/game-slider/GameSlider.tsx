@@ -1,7 +1,7 @@
 import debounce from 'lodash.debounce'; //used for preventing unnecessary re-renders
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useAPI } from '../../context/APIContext';
-import { GameSliderProps } from '../../types/types';
+import { APIDataItem, GameSliderProps } from '../../types/types';
 import SliderItem from './SliderItem';
 import { handleTouchStart, handleTouchMove } from './Swiping';
 
@@ -173,8 +173,8 @@ export default function GameSlider({ theme }: GameSliderProps) {
           {theme
             ? data &&
               data
-                .filter((item: any) => item.theme === theme) //filter items by theme then map them
-                .map((item: any, i: number) => {
+                .filter((item: APIDataItem) => item.theme === theme) //filter items by theme then map them
+                .map((item: APIDataItem, i: number) => {
                   return (
                     <SliderItem
                       key={item.id}
@@ -186,7 +186,7 @@ export default function GameSlider({ theme }: GameSliderProps) {
                   );
                 })
             : data &&
-              data.map((item: any, i: number) => (
+              data.map((item: APIDataItem, i: number) => (
                 <SliderItem
                   key={item.id}
                   refs={i === 0 ? sliderItemRef : undefined} //prevent unnecessary re-renders by geting only one item's width(every item has same width)

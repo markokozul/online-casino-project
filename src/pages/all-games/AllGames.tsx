@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import Loader from '../../components/Loader';
 import Heading from '../../components/Heading';
 import Footer from '../../components/layout/Footer';
+import { APIDataItem } from '../../types/types';
 
 export default function AllGames() {
   const { data, loading, error } = useAPI();
@@ -22,7 +23,7 @@ export default function AllGames() {
           <Heading title='All Games' />
           <div className='flex items-center justify-center flex-row flex-wrap gap-2'>
             {data &&
-              data.map((item: any) => (
+              data.map((item: APIDataItem) => (
                 <Link to={`/details/${item.id}`} key={item.id}>
                   <img
                     className=' w-32 h-full xs:w-40 sm:w-48  lg:w-52'

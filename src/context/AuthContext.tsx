@@ -4,7 +4,11 @@ import { auth } from '../firebase/firebase';
 
 const AuthContext = createContext<any>(null);
 
-export default function AuthContextProvider({ children }: any) {
+export default function AuthContextProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [user, setUser] = useState<any>();
   const [error, setError] = useState<any>();
 
@@ -24,6 +28,7 @@ export default function AuthContextProvider({ children }: any) {
 //custom hook for auth
 export function useAuth() {
   const auth = useContext(AuthContext);
+  console.log(auth.user);
   if (auth === undefined) {
     throw new Error('Context must be used within a Provider');
   }

@@ -22,8 +22,8 @@ export interface GameSliderProps {
 }
 
 export interface DetailsProps {
-  name: string;
-  img: string;
+  name?: string;
+  img?: string;
   id: string | undefined;
 }
 
@@ -43,13 +43,14 @@ export interface PaymentOptionsShowcaseProps {
 }
 
 export interface FormFields {
+  username?: string;
   email: string;
   password: string;
 }
 
-export interface FormProps {
+export interface FormComponentProps {
   fields: FormFields;
-  submit: (e: any, data: LoginFormData) => void;
+  submit: (e: React.FormEvent<EventTarget>, data: RegisterFormData) => void;
   displayError: string;
 }
 
@@ -58,3 +59,26 @@ export interface MobileSidebarProps {
   handleSidebar: () => void;
   logout: () => void;
 }
+
+export interface APIDataItem {
+  id: number;
+  img: string;
+  title: string;
+  theme: string;
+}
+export interface APIData {
+  games: APIDataItem[];
+}
+
+export interface SectionProps {
+  children: React.ReactNode;
+  styling: string;
+}
+
+export interface useFetchResults {
+  data: APIData | undefined;
+  loading: boolean;
+  error: string | undefined;
+}
+
+export type APIDataType = APIDataItem & APIData; // fetch can return data of type APIDataItem or APIData

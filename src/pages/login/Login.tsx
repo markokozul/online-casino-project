@@ -8,7 +8,7 @@ import Header from '../../components/layout/Header';
 import Main from '../../components/layout/Main';
 import Section from '../../components/layout/Section';
 import { auth } from '../../firebase/firebase';
-import { LoginFormData } from '../../types/types';
+import { FormFields, LoginFormData } from '../../types/types';
 
 export default function Login() {
   const [isLoading, setIsLoading] = useState(false);

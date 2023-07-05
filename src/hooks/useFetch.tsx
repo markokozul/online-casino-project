@@ -1,9 +1,10 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { APIData, APIDataItem, APIDataType } from '../types/types';
 
 export default function useFetch(url: string, timeout: number) {
-  const [data, setData] = useState<any>();
-  const [error, setError] = useState(null);
+  const [data, setData] = useState<APIDataType>();
+  const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

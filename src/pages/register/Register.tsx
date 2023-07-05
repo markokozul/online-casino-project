@@ -25,7 +25,10 @@ export default function Register() {
     }
   };
 
-  const handleSubmit = async (e: any, data: RegisterFormData) => {
+  const handleSubmit = async (
+    e: React.FormEvent<EventTarget>,
+    data: RegisterFormData
+  ) => {
     e.preventDefault();
     setIsLoading(true);
     const { email, password } = data;

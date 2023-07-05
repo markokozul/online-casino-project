@@ -1,8 +1,18 @@
 import { useState } from 'react';
 import Button from './Button';
+import { FormProps } from 'react-router-dom';
+import { FormComponentProps, FormFields } from '../types/types';
 
-export default function Form({ fields, submit, displayError }: any) {
-  const [data, setData] = useState({});
+export default function Form({
+  fields,
+  submit,
+  displayError,
+}: FormComponentProps) {
+  const [data, setData] = useState({
+    username: '',
+    email: '',
+    password: '',
+  });
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setData((prevValues) => {
@@ -30,10 +40,12 @@ export default function Form({ fields, submit, displayError }: any) {
           <input
             className={`w-full max-w-[400px] shadow appearance-none border rounded py-2 px-3  text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
             name={item}
-            type={fields[item]}
+            type={fields[item as keyof FormFields]}
             onInput={handleInput}
-            minLength={fields[item] === 'password' ? 6 : 1}
-            maxLength={fields[item] === 'password' ? 20 : 40}
+            minLength={fields[item as keyof FormFields] === 'password' ? 6 : 1}
+            maxLength={
+              fields[item as keyof FormFields] === 'password' ? 20 : 40
+            }
             required
           />
         </label>

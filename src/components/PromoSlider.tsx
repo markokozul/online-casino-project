@@ -29,14 +29,14 @@ export default function PromoSlider() {
   };
 
   //used for swiping
-  const handleTouchStart = (e: any) => {
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
     setTouchEnd(0);
     setTouchStart(e.targetTouches[0].clientX);
   };
-  const handleTouchMove = (e: any) => {
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
     setTouchEnd(e.targetTouches[0].clientX);
   };
-  const handleTouchEnd = (e: any) => {
+  const handleTouchEnd = () => {
     if (touchEnd && touchStart - touchEnd > 60) {
       console.log(touchStart - touchEnd);
       handleNext();
