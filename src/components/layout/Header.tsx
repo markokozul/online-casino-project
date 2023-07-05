@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../assets/logowhite.png';
 import { useAuth } from '../../context/AuthContext';
-import { auth } from '../../firebase/firebase';
+import { auth } from '../../firebase';
 import Button from '../Button';
 import MobileSidebar from '../MobileSidebar';
 

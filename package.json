@@ -31,7 +31,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test --transformIgnorePatterns 'node_modules/(?!my-library-dir)/'",
     "eject": "react-scripts eject",
-    "dev": "tailwindcss -i ./src/index.css -o ./dist/style.css --watch"
+    "dev": "tailwindcss -i ./src/index.css -o ./dist/style.css --watch",
+    "predeploy": "npm run build",
+    "deploy": "firebase build"
   },
   "eslintConfig": {
     "extends": [

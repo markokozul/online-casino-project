@@ -1,7 +1,7 @@
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate, Link } from 'react-router-dom';
 import Form from '../../components/Form';
-import { auth } from '../../firebase/firebase';
+import { auth } from '../../firebase';
 import { RegisterFormData } from '../../types/types';
 import Header from '../../components/layout/Header';
 import Main from '../../components/layout/Main';
