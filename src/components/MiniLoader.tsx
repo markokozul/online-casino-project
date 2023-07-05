@@ -2,7 +2,7 @@ import { Oval } from 'react-loader-spinner';
 
 export default function MiniLoader() {
   return (
-    <div className='absolute'>
+    <div className='absolute' role='contentinfo'>
       <Oval
         height={100}
         width={100}

@@ -16,7 +16,6 @@ export default function Home() {
   return (
     <div>
       <Header />
-
       <Main>
         <Section styling='relative bg-backgr1 bg-cover bg-center  flex items-center justify-center flex-col gap-24 px-5 py-24  h-auto lg:px-16 lg:py-40'>
           <PromoSlider />

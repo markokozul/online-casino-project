@@ -61,7 +61,7 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll); //cleanup of event listener
   }, []);
   return (
-    <>
+    <div>
       <div
         ref={header}
         className={` ${backgr ? 'bg-header-bg/80' : 'bg-transparent'} ${
@@ -104,6 +104,6 @@ export default function Header() {
         handleSidebar={handleSidebar}
         logout={handleLogout}
       />
-    </>
+    </div>
   );
 }

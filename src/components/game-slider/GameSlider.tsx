@@ -123,6 +123,7 @@ export default function GameSlider({ theme }: GameSliderProps) {
         </button>
 
         <div
+          role='contentinfo' //used for testing
           onTouchStart={(e) =>
             handleTouchStart(
               e,

@@ -1,3 +1,5 @@
+import React from 'react';
+
 import GameSlider from '../../components/game-slider/GameSlider';
 import { GameShowcaseProps } from '../../types/types';
 
