@@ -70,22 +70,22 @@ export default function PromoSlider() {
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
           key={i}
-          className={`absolute inset-0 w-full xs:px-5 md:px-24 flex flex-col md:flex-row items-center justify-center gap-10 z-30 transition-all ease-in duration-300 ${
+          className={`absolute inset-0 w-full px-0 xs:px-5 md:px-24 flex flex-col md:flex-row items-center justify-center gap-10 z-30 transition-all ease-in duration-300 ${
             i === activeIndex ? 'opacity-100' : 'opacity-0'
           }`}
         >
           <div className='flex flex-col items-center justify-center gap-6'>
             <img src={logo} alt='' className='w-64'></img>
             {i % 2 === 0 ? ( //changing text based on even numbers(purely for a showcase of two different text sizes on a slider)
-              <p className='flex-[60] text-center px-12 md:px-0 lg:px-12 xl:px-24'>
+              <p className='flex-[60] text-center px-2 xs:px-12 md:px-0 lg:px-12 xl:px-24'>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                 Tenetur soluta dolorum temporibus voluptas dolorem, magni ipsum
-                dicta beatae quasi voluptatum doloribus.
+                dicta beatae quasi.
               </p>
             ) : (
               <p className='flex-[60] text-center px-12'>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Tenetur soluta dolorum temporibus voluptas dolorem.
+                Tenetur soluta dolorum temporibus.
               </p>
             )}
             {isAuthenticated ? (
