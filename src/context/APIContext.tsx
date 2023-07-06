@@ -10,7 +10,7 @@ export default function APIContextProvider({
 }) {
   // Fetch data using custom useFetch hook
   const { data, loading, error } = useFetch(
-    'https://api.jsonstorage.net/v1/json/dfc0526f-6e02-4fd9-b65f-b51ecfc20067/394422d9-3764-433e-86b5-3c2824fc4ef6',
+    'https://my-json-server.typicode.com/markokozul/markokozul.github.io/games',
     1000
   );
 

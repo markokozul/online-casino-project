@@ -10,7 +10,7 @@ export default function PlayGame() {
   const { id } = useParams();
 
   const { data, loading, error } = useFetch(
-    `http://localhost:8001/games/${id}`,
+    `https://my-json-server.typicode.com/markokozul/online-casino-project/games/${id}`,
     0 //set timeout to 0
   );
 

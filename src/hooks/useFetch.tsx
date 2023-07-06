@@ -15,7 +15,7 @@ export default function useFetch(url: string, timeout: number) {
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
-          setData(data.games);
+          setData(data);
         })
         .catch((err) => {
           setError(err);
