@@ -1,6 +1,6 @@
 # Online Casino Project
 
--This project was made as a part of a job interview.
+This project was made as a part of a job interview.
 
 Live Demo : https://online-casino-8b213.web.app/
 
