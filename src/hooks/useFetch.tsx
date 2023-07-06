@@ -9,10 +9,13 @@ export default function useFetch(url: string, timeout: number) {
 
   useEffect(() => {
     setTimeout(() => {
-      axios
-        .get(url)
-        .then((res) => {
-          setData(res.data);
+      fetch(url, {
+        mode: 'cors',
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          setData(data.games);
         })
         .catch((err) => {
           setError(err);

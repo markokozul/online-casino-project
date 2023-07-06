@@ -9,7 +9,7 @@ export default function Button({
   action,
 }: ButtonProps) {
   const linkStyle =
-    'text-white font-bold text-lg border-b-[1px] p-2 hover:bg-[#431096]';
+    'text-white font-bold text-lg border-b-[1px] p-2 md:transition-all md:duration-200 md:ease-in-out md:hover:scale-110';
   const buttonStyle =
     'px-4 py-2 md:px-6 md:py-2 text-sm xs:text-base bg-gradient-to-t from-[#ff9c19] to-[#ffdd2d]  text-gray-800 font-bold rounded-xl text-lg';
 

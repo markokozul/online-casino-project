@@ -3,7 +3,7 @@ import logo from '../assets/logowhite.png';
 
 export default function Loader() {
   return (
-    <div className='fixed h-full w-full bg-backgr2 bg-center bg-cover flex flex-col items-center justify-center gap-6'>
+    <div className='fixed h-full w-full bg-backgr2 bg-center bg-cover flex flex-col items-center justify-center gap-6 px-6'>
       <img src={logo} alt='loading-logo' />
 
       <Oval

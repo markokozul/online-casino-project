@@ -28,7 +28,6 @@ export default function AuthContextProvider({
 //custom hook for auth
 export function useAuth() {
   const auth = useContext(AuthContext);
-  console.log(auth.user);
   if (auth === undefined) {
     throw new Error('Context must be used within a Provider');
   }

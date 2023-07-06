@@ -3,12 +3,10 @@ import Loader from '../../components/Loader';
 import Footer from '../../components/layout/Footer';
 import Header from '../../components/layout/Header';
 import Main from '../../components/layout/Main';
+import Section from '../../components/layout/Section';
 import useFetch from '../../hooks/useFetch';
 import GameShowcase from '../home/GameShowcase';
 import Details from './Details';
-import Section from '../../components/layout/Section';
-import { useState } from 'react';
-import { APIDataItem } from '../../types/types';
 export default function GameDetails() {
   let { id } = useParams(); //get id of a game from url
 
