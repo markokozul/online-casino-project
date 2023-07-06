@@ -1,46 +1,61 @@
-# Getting Started with Create React App
+# Online Casino Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+-This project was made as a part of a job interview.
 
-## Available Scripts
+Live Demo : https://online-casino-8b213.web.app/
 
-In the project directory, you can run:
+## Getting Started
+
+Live preview of this app is available,but in case \
+you want to start this application locally,\
+clone this project on your machine,\
+go to the root directory of the project
+and run
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Firebase
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+To setup Firebase,follow these [instructions](https://firebase.google.com/docs/admin/setup/).
 
-### `npm test`
+## Overview of the project
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Features
 
-### `npm run build`
+- Responsive design
+- Authentication using email and password
+- Custom image slider
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Technologies used
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+\
+[![My Skills](https://skills.thijs.gg/icons?i=html,css,js,react,typescript,tailwind,firebase,jest)](https://skills.thijs.gg)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### [React](https://react.dev/)
 
-### `npm run eject`
+- JavaScript library/framework
+- used for building frontend user interfaces
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### [Typescript](https://www.typescriptlang.org/)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- superset of JavaScript
+- allows usage of static typing
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### [Tailwind CSS](https://tailwindcss.com/)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- A utility-first CSS framework
+- Uses pre-defined classes
 
-## Learn More
+### [Firebase](https://firebase.google.com/)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- used for authentication
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### [Jest](https://jestjs.io/)
+
+- used for testing React components coupled with React Testing Library
+
+### Challenges
+
+- The biggest one was an image slider since it was fully custom and there were a lots of problems with responsivity and swiping
+- Getting used to Typescript and static typing
+- Testing - writing useful tests (It would be much better if TDD method was used - First writing a test,then writing minimal code to pass that test)
