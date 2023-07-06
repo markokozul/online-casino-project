@@ -23,7 +23,6 @@ export default function MobileSidebar({
 
         {isAuthenticated ? (
           <>
-            <Button title='All Games' navigate='/all-games' styling='link' />
             <Button title='Sign Out' styling='link' action={() => logout()} />
           </>
         ) : (

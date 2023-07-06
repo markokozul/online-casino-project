@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import Button from './Button';
-import { FormProps } from 'react-router-dom';
 import { FormComponentProps, FormFields } from '../types/types';
+import Button from './Button';
 
 export default function Form({
   fields,
@@ -29,7 +28,7 @@ export default function Form({
       className='w-[90%] xs:w-96 lg:w-[500px] xl:w-[650px]  flex flex-col justify-center items-center  gap-8 px-4 xxs:px-8 py-16 xl:py-20  bg-white/40 shadow-md rounded  '
     >
       {displayError ? (
-        <p className='text-red-900 text-center'>{displayError}</p>
+        <p className='text-red-800 font-bold text-center'>{displayError}</p>
       ) : (
         ''
       )}
