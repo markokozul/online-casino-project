@@ -24,13 +24,13 @@ export default function GameSlider({ theme }: GameSliderProps) {
   const slider = useRef<HTMLDivElement>(null);
 
   //accessing DOM elements using callback refs(cant use useRef because DOM isn't loaded on first render)
-  const sliderContainer = useCallback(
+  const sliderContainerRef = useCallback(
     (node: HTMLDivElement) => {
       if (node) {
         setSliderContainerSize(node.getBoundingClientRect().width);
       }
     },
-    [resize] //update slider container width wresize state changes
+    [resize] //update slider container width when resize state changes
   );
 
   const sliderItemRef = useCallback(
@@ -39,7 +39,7 @@ export default function GameSlider({ theme }: GameSliderProps) {
         setsliderItemSize(node.getBoundingClientRect().width);
       }
     },
-    [resize]
+    [resize] //update slider item width when resize state changes
   );
 
   const handleResize = () => {
@@ -102,7 +102,7 @@ export default function GameSlider({ theme }: GameSliderProps) {
     <div className='w-full flex items-center justify-center flex-row'>
       <div
         className='group relative overflow-hidden w-full h-40 xs:h-44 sm:h-48 lg:h-52 flex flex-row justify-between items-center'
-        ref={sliderContainer}
+        ref={sliderContainerRef}
         //inline conditional styling-easier than tailwind conditional styling
         style={
           sliderSize < sliderContainerSize //if slider size is smaller than container,set slider on center of container

@@ -1,12 +1,11 @@
-import React from 'react';
-import { useAPI } from '../../context/APIContext';
+import { Link } from 'react-router-dom';
+import Heading from '../../components/Heading';
+import Loader from '../../components/Loader';
+import Footer from '../../components/layout/Footer';
 import Header from '../../components/layout/Header';
 import Main from '../../components/layout/Main';
 import Section from '../../components/layout/Section';
-import { Link } from 'react-router-dom';
-import Loader from '../../components/Loader';
-import Heading from '../../components/Heading';
-import Footer from '../../components/layout/Footer';
+import { useAPI } from '../../context/APIContext';
 import { APIDataItem } from '../../types/types';
 
 export default function AllGames() {
