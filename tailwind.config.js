@@ -15,6 +15,8 @@ module.exports = {
       lg: '1024px',
 
       xl: '1280px',
+
+      xxl: '2000px',
     },
     extend: {
       //main colors to use throughout the application

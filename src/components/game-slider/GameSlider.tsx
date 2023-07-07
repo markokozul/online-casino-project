@@ -170,7 +170,7 @@ export default function GameSlider({ theme }: GameSliderProps) {
           }
           ref={slider}
         >
-          {theme
+          {theme //if theme is provided,filter items with given theme
             ? data &&
               data
                 .filter((item: APIDataItem) => item.theme === theme) //filter items by theme then map them
@@ -185,7 +185,7 @@ export default function GameSlider({ theme }: GameSliderProps) {
                     ></SliderItem>
                   );
                 })
-            : data &&
+            : data && // else just display all items
               data.map((item: APIDataItem, i: number) => (
                 <SliderItem
                   key={item.id}

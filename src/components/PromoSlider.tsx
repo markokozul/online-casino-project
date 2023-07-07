@@ -63,7 +63,7 @@ export default function PromoSlider() {
   });
 
   return (
-    <div className='relative w-full h-96'>
+    <div className='relative w-full h-96 xxl:py-64'>
       {arr.map((item: string, i: number) => (
         <div
           onTouchStart={handleTouchStart}
@@ -77,13 +77,13 @@ export default function PromoSlider() {
           <div className='flex flex-col items-center justify-center gap-6'>
             <img src={logo} alt='' className='w-64'></img>
             {i % 2 === 0 ? ( //changing text based on even numbers(purely for a showcase of two different text sizes on a slider)
-              <p className='flex-[60] text-center px-2 xs:px-12 md:px-0 lg:px-12 xl:px-24'>
+              <p className='flex-[60] text-center px-2 xs:px-12 md:px-0 lg:px-12 xl:px-24 xxl:px-64'>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Tenetur soluta dolorum temporibus voluptas dolorem, magni ipsum
-                dicta beatae quasi.
+                Tenetur soluta dolorum temporibus voluptas dolorem,
+                <br /> magni ipsum dicta beatae quasi.
               </p>
             ) : (
-              <p className='flex-[60] text-center px-12'>
+              <p className='flex-[60] text-center px-12 xxl:px-64'>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                 Tenetur soluta dolorum temporibus.
               </p>

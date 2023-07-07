@@ -20,7 +20,7 @@ export default function PlayGame() {
     <div>
       <Header />
       <Main>
-        <Section styling='bg-backgr3 bg-center bg-cover flex items-center justify-center py-24'>
+        <Section styling='h-screen bg-backgr3 bg-center bg-cover flex items-center justify-center py-24'>
           <img src={data && data.img} alt=''></img>
         </Section>
       </Main>

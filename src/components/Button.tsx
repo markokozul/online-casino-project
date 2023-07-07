@@ -11,7 +11,7 @@ export default function Button({
   const linkStyle =
     'text-white font-bold text-lg border-b-[1px] p-2 md:transition-all md:duration-200 md:ease-in-out md:hover:scale-110';
   const buttonStyle =
-    ' px-8 py-3 md:px-6 md:py-2 xxl:px-8 py-3  xs:text-base bg-gradient-to-t from-[#ff9c19] to-[#ffdd2d]  text-gray-800 font-bold rounded-xl text-lg';
+    ' px-8 py-3 md:px-6 md:py-2 xxl:px-8 py-3 xl:text-lg xxl:px-9 xxl:py-3  xs:text-base bg-gradient-to-t from-[#ff9c19] to-[#ffdd2d]  text-gray-800 font-bold rounded-xl text-lg';
 
   return (
     <>

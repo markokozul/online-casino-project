@@ -68,12 +68,12 @@ export default function Header() {
           visible
             ? 'fixed  transition-all duration-300 ease-linear'
             : 'absolute '
-        }  flex items-center justify-end w-full min-h-[60px] px-16  z-[51]`}
+        }  flex items-center justify-end w-full min-h-[60px] xl:min-h-[80px] xxl:min-h-[100px] px-16  z-[51]`}
       >
         <Link to={'/'}>
           <img
             src={logo}
-            className=' hidden w-40 absolute left-8 top-2 xxs:block'
+            className=' hidden w-40 xl:w-48 xxl:w-64 absolute left-8 top-2 xl:top-4 xxs:block'
             alt='logo'
           />
         </Link>
