@@ -4,20 +4,6 @@ This project was made as a part of a job interview.
 
 Live Demo : https://online-casino-8b213.web.app/
 
-## Getting Started
-
-Live preview of this app is available,but in case \
-you want to start this application locally,\
-clone this project on your machine,\
-go to the root directory of the project
-and run
-
-### `npm start`
-
-### Firebase
-
-To setup Firebase,follow these [instructions](https://firebase.google.com/docs/admin/setup/).
-
 ## Overview of the project
 
 ### Features
