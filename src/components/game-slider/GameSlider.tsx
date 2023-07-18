@@ -6,7 +6,7 @@ import SliderItem from './SliderItem';
 import { handleTouchStart, handleTouchMove } from './Swiping';
 
 export default function GameSlider({ theme }: GameSliderProps) {
-  const { data } = useAPI(); //get game data from custom hook for Context
+  const { data } = useAPI(); //get game data from custom hook for API Context
 
   const [move, setMove] = useState(0); // how much has slider moved in pixels
   const [sliderSize, setSliderSize] = useState(0);
