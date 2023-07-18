@@ -2,7 +2,7 @@
 #firebase
 src/firebase.ts
 .firebase
-.firebasesrc
+.firebaserc
 firebase.json
 
 # dependencies
